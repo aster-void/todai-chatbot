@@ -1,0 +1,40 @@
+#chat-messages {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.chat-message {
+  padding: 10px;
+  border: 1px solid;
+  border-radius: 5px;
+}
+.chat-message--you {
+  border-color: #ff0000;
+}
+.chat-message--ai {
+  border-color: #0000ff;
+}
+
+.chat-message__author {
+  font-weight: bold;
+}
+
+.chat-message__content {
+  margin-top: 5px;
+}
+
+.chat-message__delete-button {
+  margin-top: 5px;
+}
+
+#input-form {
+  display: flex;
+  gap: 5px;
+}
+
+#prompt-text-input {
+  flex-grow: 1;
+}

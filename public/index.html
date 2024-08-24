@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI チャット</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <h1>AI チャット</h1>
+    <ul id="chat-messages">
+      <!-- template 要素は JavaScript を通して操作する。 -->
+      <!-- 画面には表示されないため、どこに配置してもよい。 -->
+      <template id="chat-message-template">
+        <li class="chat-message">
+          <div class="chat-message__author"></div>
+          <div class="chat-message__content"></div>
+          <button class="chat-message__delete-button" type="button">
+            削除
+          </button>
+        </li>
+      </template>
+    </ul>
+    <form id="input-form">
+      <input id="prompt-text-input" />
+      <button type="submit">送信</button>
+    </form>
+    <script src="/script.js"></script>
+  </body>
+</html>
