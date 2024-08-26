@@ -1,0 +1,11 @@
+{
+  "name": "todai-chatbot",
+  "version": "1.0.0",
+  "license": "MIT",
+  "dependencies": {
+    "husky": "^9.1.5"
+  },
+  "scripts": {
+    "prepare": "husky"
+  }
+}
