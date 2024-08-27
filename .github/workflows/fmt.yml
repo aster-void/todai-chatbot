@@ -21,4 +21,4 @@ jobs:
 
     - run: |
         go fmt ./...
-        git diff --quiet --exit status
+        git diff --quiet
