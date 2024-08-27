@@ -21,6 +21,6 @@ jobs:
           tools/go.sum
 
     - name: Staticcheck
-      uses: dominikh/staticcheck-action@v1.3.0
+      run: go run honnef.co/go/tools/cmd/staticcheck ./...
 
     - run: go vet ./...
