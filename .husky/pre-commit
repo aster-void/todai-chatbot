@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
 if [ `git branch --show-current` == 'main' ]; then
-  echo 'WARNING: commiting on main branch'
+  echo '-------------------------------------'
+  echo '| WARNING: commiting on main branch |'
+  echo '-------------------------------------'
 fi
