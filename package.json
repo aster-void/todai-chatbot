@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "license": "MIT",
   "dependencies": {
-    "husky": "^9.1.5"
+    "husky": "^9.1.5",
+    "openai": "^4.56.0"
   },
   "scripts": {
     "prepare": "husky"
