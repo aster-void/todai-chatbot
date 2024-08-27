@@ -21,4 +21,6 @@ func Test(g *echo.Group) {
 		time.Sleep(dur)
 		return c.String(200, "slept well")
 	})
+
+	time.Parse(time.RFC3339, "invalid format")
 }
