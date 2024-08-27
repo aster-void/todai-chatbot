@@ -1,4 +1,4 @@
-name: Build
+name: Check Style
 
 on:
   push:
@@ -6,10 +6,10 @@ on:
   pull_request:
 
 jobs:
-  build:
+  fmt:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout Code
+    - name: Checkout
       uses: actions/checkout@v4
 
     - name: Set up Node.js
@@ -21,5 +21,8 @@ jobs:
     - name: setup
       run: make setup
 
-    - name: build
-      run: make build
+    - name: Lint
+      run: make lint
+
+    - name: Format
+      run: make format-check
