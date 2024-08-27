@@ -1,7 +1,7 @@
 package router
 
 import (
-	"github.com/aster-void/openai-go-template/server/env"
+	"github.com/aster-void/todai-chatbot/server/env"
 	"github.com/labstack/echo/v4"
 )
 

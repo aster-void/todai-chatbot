@@ -3,7 +3,7 @@ package chat
 import (
 	"context"
 
-	"github.com/aster-void/openai-go-template/domain/openai"
+	"github.com/aster-void/todai-chatbot/domain/openai"
 )
 
 func Exchange(text string, ctx context.Context) (string, error) {

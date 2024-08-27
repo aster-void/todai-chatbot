@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/aster-void/openai-go-template/server/handler"
-	"github.com/aster-void/openai-go-template/server/router"
+	"github.com/aster-void/todai-chatbot/server/handler"
+	"github.com/aster-void/todai-chatbot/server/router"
 	"github.com/labstack/echo/v4"
 )
 

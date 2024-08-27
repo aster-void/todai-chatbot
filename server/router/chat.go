@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/aster-void/openai-go-template/domain/chat"
+	"github.com/aster-void/todai-chatbot/domain/chat"
 	"github.com/labstack/echo/v4"
 )
 

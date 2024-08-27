@@ -1,4 +1,4 @@
-module github.com/aster-void/openai-go-template
+module github.com/aster-void/todai-chatbot
 
 go 1.22.5
 

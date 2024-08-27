@@ -3,7 +3,7 @@ package openai
 import (
 	"context"
 
-	"github.com/aster-void/openai-go-template/server/env"
+	"github.com/aster-void/todai-chatbot/server/env"
 	"github.com/sashabaranov/go-openai"
 )
 
