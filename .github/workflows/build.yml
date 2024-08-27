@@ -1,4 +1,4 @@
-name: Go Lint
+name: Go Build
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
   pull_request:
 
 jobs:
-  lint:
+  build:
     runs-on: ubuntu-latest
     steps:
     - name: Set up Go
