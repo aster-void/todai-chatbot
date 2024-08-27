@@ -16,7 +16,8 @@ setup-backend:
 setup-root:
 	npm ci
 
-huskey: npx husky
+huskey: 
+	npx husky
 	git checkout .husky
 
 watch:
