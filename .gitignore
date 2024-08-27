@@ -3,6 +3,7 @@
 
 # artifact
 /target
+/todai-chatbot
 
 # secret
 /.env
