@@ -1,0 +1,13 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "watch": "echo 'TODO: watch'",
+    "build": "mkdir -p ../public; echo 'build command not specified' > public/out.html",
+    "serve": "echo 'serving is done on server-side!'; exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
