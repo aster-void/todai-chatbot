@@ -11,8 +11,5 @@ build-frontend:
 build-server: 
 		cd backend && npm run build
 
-start:
-	DEV_MODE=true ENV_FILE=.env go run .
-
 serve:
 	./target/main
