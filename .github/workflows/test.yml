@@ -18,9 +18,5 @@ jobs:
         go-version: "1.22"
         cache-dependency-path: |
           go.sum
-          tools/go.sum
 
-    - run: |
-        pwd
-        ls
-      working-directory: .
+    - run: go test ./...

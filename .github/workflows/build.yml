@@ -18,7 +18,6 @@ jobs:
         go-version: "1.22"
         cache-dependency-path: |
           go.sum
-          tools/go.sum
 
     - run: |
         go build -o /dev/null .
