@@ -1,7 +1,7 @@
 default: start
 
 watch:
-		(trap 'kill 0' SIGINT; (cd frontend && npm run dev) && (cd backend-ts && npm run dev) & wait)
+		(trap 'kill 0' SIGINT; (cd frontend && npm run dev) && (cd backend && npm run dev) & wait)
 
 build: build-server build-frontend
 
