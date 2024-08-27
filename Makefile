@@ -22,12 +22,12 @@ huskey: npx husky
 watch:
 		(trap 'kill 0' SIGINT; (cd frontend && npm run dev) && (cd backend && npm run dev) & wait)
 
-build: build-server build-frontend
+build: build-backend build-frontend
 
 build-frontend: 
 		cd frontend && npm run build
 
-build-server: 
+build-backend: 
 		cd backend && npm run build
 
 serve:
