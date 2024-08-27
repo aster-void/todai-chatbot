@@ -18,5 +18,8 @@ jobs:
           go.sum
           tools/go.sum
 
-    - run: go build -o /dev/null .
+    - run: |
+        pwd
+        ls
+        go build -o /dev/null .
       working-directory: .
