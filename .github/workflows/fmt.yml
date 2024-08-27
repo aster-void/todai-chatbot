@@ -19,4 +19,6 @@ jobs:
         cache-dependency-path: |
           go.sum
 
-    - run: "go fmt ./...; git diff --quiet --exit status"
+    - run: |
+        go fmt ./... &&\
+        git diff --quiet --exit status
