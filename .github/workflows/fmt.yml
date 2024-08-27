@@ -20,5 +20,5 @@ jobs:
           go.sum
 
     - run: |
-        go fmt ./... &&\
+        go fmt ./...
         git diff --quiet --exit status
