@@ -12,10 +12,12 @@
   "description": "",
   "dependencies": {
     "@langchain/openai": "^0.2.8",
+    "@prisma/client": "^5.18.0",
     "express": "^4.19.2",
     "typescript": "^5.5.4"
   },
   "devDependencies": {
-    "@types/express": "^4.17.21"
+    "@types/express": "^4.17.21",
+    "prisma": "^5.18.0"
   }
 }
