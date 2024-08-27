@@ -6,12 +6,10 @@ watch:
 build: build-server build-frontend
 
 build-frontend: 
-		cd frontend 
-		npm run build
+		cd frontend && npm run build
 
 build-server: 
-		cd backend 
-		npm run build
+		cd backend && npm run build
 
 start:
 	DEV_MODE=true ENV_FILE=.env go run .
