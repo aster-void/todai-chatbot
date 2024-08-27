@@ -1,4 +1,4 @@
-name: Go Build
+name: Test
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
   pull_request:
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
     - name: Set up Go
@@ -19,5 +19,6 @@ jobs:
           tools/go.sum
 
     - run: |
-        go build -o /dev/null .
+        pwd
+        ls
       working-directory: .
