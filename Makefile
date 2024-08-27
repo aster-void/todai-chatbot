@@ -45,7 +45,13 @@ type-check-frontend:
 
 ## Runner
 watch:
-		(trap 'kill 0' SIGINT; (cd frontend && npm run dev) && (cd backend && npm run dev) & wait)
+		(trap 'kill 0' SIGINT; make watch-frontend & make watch-backend & wait)
+
+watch-frontend:
+	cd frontend; npm run dev
+
+watch-backend:
+	cd backend; npm run dev
 
 build: build-backend build-frontend
 
