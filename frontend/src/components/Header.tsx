@@ -8,7 +8,7 @@ export function Header() {
         alignItems: "center",
         padding: "0.5rem",
         borderBottom: "1px solid #ddd",
-        width: "100%"
+        width: "100%",
       }}
     >
       <Typography variant="h5">東大チャットbot</Typography>

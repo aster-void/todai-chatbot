@@ -15,7 +15,7 @@ export function Chat() {
           flexDirection: "column",
           height: "90%",
           padding: 2,
-          width: "100%"
+          width: "100%",
         }}
       >
         {/* {messages ? ( */}

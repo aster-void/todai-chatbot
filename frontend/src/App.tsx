@@ -13,7 +13,7 @@ function App() {
         justifyContent="center"
         width="100%"
         height="100vh"
-        bgcolor="#f5f5f5" 
+        bgcolor="#f5f5f5"
       >
         <Header />
         <Chat />
@@ -21,6 +21,5 @@ function App() {
     </>
   );
 }
-
 
 export default App;
