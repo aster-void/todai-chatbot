@@ -9,20 +9,20 @@ jobs:
   fmt:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: v22.6.0
-        cache: npm
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: v22.6.0
+          cache: npm
 
-    - name: setup
-      run: make setup
+      - name: setup
+        run: make setup
 
-    - name: Lint
-      run: make lint
+      - name: Lint
+        run: make lint
 
-    - name: Format
-      run: make format-check
+      - name: Format
+        run: make format-check
