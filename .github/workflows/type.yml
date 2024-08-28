@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
-    
+
 jobs:
   fmt:
     runs-on: ubuntu-latest
@@ -20,7 +20,7 @@ jobs:
 
       - name: setup
         run: make setup
-      
+
       - name: Type Check front
         run: npx tsc --noEmit
         working-directory: frontend

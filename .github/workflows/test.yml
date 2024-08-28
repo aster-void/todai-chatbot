@@ -9,14 +9,17 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - name: Set up Go
-      uses: actions/setup-go@v4
-      with:
-        go-version: "1.22"
-        cache-dependency-path: |
-          go.sum
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: v22.6.0
+          cache: npm
 
-    - run: go test ./...
+      - name: Set up
+        uses: make setup
+
+      - name: Run Test
+        run: make test

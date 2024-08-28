@@ -9,17 +9,17 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: v22.6.0
-        cache: npm
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: v22.6.0
+          cache: npm
 
-    - name: setup
-      run: make setup
+      - name: setup
+        run: make setup
 
-    - name: build
-      run: make build
+      - name: build
+        run: make build
