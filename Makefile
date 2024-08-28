@@ -63,3 +63,8 @@ build-backend:
 
 serve:
 	./target/main
+
+## Test
+## TODO: add test command
+make test:
+		

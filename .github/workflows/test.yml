@@ -12,11 +12,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Go
-        uses: actions/setup-go@v4
-        with:
-          go-version: "1.22"
-          cache-dependency-path: |
-            go.sum
+      - name: Set up 
+        uses: make setup
 
-      - run: go test ./...
+      - run: make test 
