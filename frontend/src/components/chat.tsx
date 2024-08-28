@@ -1,5 +1,6 @@
-import { Box, Paper, Typography } from "@mui/material";
+import { Avatar, Box, Paper, Typography } from "@mui/material";
 import { MessageInput } from "./MessageInput";
+import { deepOrange } from "@mui/material/colors";
 
 export function Chat() {
   // const sendMessage = async (msg: SendMessage): Promise<void> => {
@@ -8,16 +9,17 @@ export function Chat() {
 
   return (
     <>
-      <Typography>東大チャットbot</Typography>
       <Box
         sx={{
           display: "flex",
           flexDirection: "column",
           height: "90%",
           padding: 2,
+          width: "100%"
         }}
       >
         {/* {messages ? ( */}
+        <Avatar sx={{ bgcolor: deepOrange[500] }}>東大</Avatar>
         <Box sx={{ flexGrow: 1, overflowY: "auto", padding: 1 }}>
           {/* {messages.map((m) => ( */}
           <Box
@@ -39,6 +41,7 @@ export function Chat() {
                 border: 1,
               }}
             >
+              <Typography>何かご質問はありますか？</Typography>
               {/* <Typography>{m.content}</Typography> */}
             </Paper>
           </Box>

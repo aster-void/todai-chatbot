@@ -24,7 +24,7 @@ export function MessageInput() {
         <Stack direction="row" spacing={1} alignItems="center" margin={2}>
           <TextField
             name="message"
-            placeholder="メッセージを入力"
+            placeholder="東大チャットbotに質問"
             variant="outlined"
             size="small"
             // value={message}
