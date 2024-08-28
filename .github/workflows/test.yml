@@ -12,7 +12,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up 
+      - name: Set up
         uses: make setup
 
-      - run: make test 
+      - run: make test
