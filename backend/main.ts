@@ -17,6 +17,10 @@ app.get("/", (req, res) => {
   res.send("Hello Express!");
 });
 
+app.get('/api/message', (req, res) => {
+  res.json({ message: 'Hello from Backend' });
+});
+
 // app.post("/chat", async (request, response) => {
 //   const promptText = request?.body?.promptText;
 //   // クライアントから送られてきたデータは無条件で信用しない
