@@ -8,26 +8,43 @@ import (
 	"github.com/gocolly/colly"
 )
 
-func Scrape(domain, startAt, nextPageSelector, resultingPageSelector string, pathsMustSatisfy func(string) bool) (visited map[string]string) {
+type Config struct {
+	Domain  string
+	StartAt string
+
+	NextPageSelector      string
+	ResultingPageSelector string
+	PathsMustSatisfy      func(string) bool
+
+	TitleFormatter func(e *colly.Response) string
+}
+
+type Page struct {
+	URL     string `json:"url"`
+	Title   string `json:"title"`
+	Content string `json:"content"`
+}
+
+func Scrape(cf *Config) (visited map[string]string) {
 	visited = make(map[string]string)
 
 	c := colly.NewCollector(
-		colly.AllowedDomains(domain),
+		colly.AllowedDomains(cf.Domain),
 		colly.CacheDir("./.colly.cache"),
 	)
 
 	c.OnHTML("a[href]", func(e *colly.HTMLElement) {
 		href := e.Attr("href")
-		if pathsMustSatisfy(href) {
+		if cf.PathsMustSatisfy(href) {
 			_ = e.Request.Visit(href)
 		}
 	})
 
 	// save all requested pages
-	c.OnHTML(resultingPageSelector, onHTML(visited, pathsMustSatisfy))
+	c.OnHTML(cf.ResultingPageSelector, onHTML(visited, cf.PathsMustSatisfy))
 
 	// next page
-	c.OnHTML(nextPageSelector, func(e *colly.HTMLElement) {
+	c.OnHTML(cf.NextPageSelector, func(e *colly.HTMLElement) {
 		_ = e.Request.Visit(e.Attr("href"))
 	})
 
@@ -35,7 +52,7 @@ func Scrape(domain, startAt, nextPageSelector, resultingPageSelector string, pat
 		fmt.Println("Error on visiting URL:", r.Request.URL, "failed with error:", err)
 	})
 
-	err := c.Visit(startAt)
+	err := c.Visit(cf.StartAt)
 	if err != nil {
 		log.Fatalln("Error on visit: ", err)
 	}
