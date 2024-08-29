@@ -3,20 +3,26 @@ package scraper
 import (
 	"fmt"
 	"log"
+	"sort"
 
 	"github.com/aster-void/todai-chatbot/scraper/formatter"
+	"github.com/go-playground/validator"
 	"github.com/gocolly/colly"
 )
 
 type Config struct {
-	Domain  string
-	StartAt string
+	Domain  string `validate:"required"`
+	StartAt string `validate:"required"`
 
-	NextPageSelector      string
-	ResultingPageSelector string
-	PathsMustSatisfy      func(string) bool
+	NextPageSelector      string                     `validate:"required"`
+	PathsMustSatisfy      func(string) bool          `validate:"required"`
+	ResultPageMustSatisfy func(*colly.Response) bool `validate:"required"`
 
-	TitleFormatter func(e *colly.Response) string
+	TitleFormatter func(*colly.Response) string `validate:"required"`
+
+	ResultPageLinkSelector    string              `validate:"required"`
+	ResultPageContentSelector string              `validate:"required"`
+	ContentFormatter          func(string) string `validate:"required"`
 }
 
 type Page struct {
@@ -25,8 +31,13 @@ type Page struct {
 	Content string `json:"content"`
 }
 
-func Scrape(cf *Config) (visited map[string]string) {
-	visited = make(map[string]string)
+func Scrape(cf *Config) []Page {
+	visited := make(map[string]Page)
+	validate := validator.New()
+	err := validate.Struct(cf)
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	c := colly.NewCollector(
 		colly.AllowedDomains(cf.Domain),
@@ -41,7 +52,20 @@ func Scrape(cf *Config) (visited map[string]string) {
 	})
 
 	// save all requested pages
-	c.OnHTML(cf.ResultingPageSelector, onHTML(visited, cf.PathsMustSatisfy))
+	convertPage := func(e *colly.HTMLElement) *Page {
+		var url = e.Request.URL.String()
+		if !cf.ResultPageMustSatisfy(e.Response) {
+			return nil
+		}
+		var text string = formatter.ExtractText(e)
+		text = cf.ContentFormatter(text)
+		return &Page{
+			URL:     url,
+			Title:   cf.TitleFormatter(e.Response),
+			Content: text,
+		}
+	}
+	c.OnHTML(cf.ResultPageContentSelector, save(visited, convertPage))
 
 	// next page
 	c.OnHTML(cf.NextPageSelector, func(e *colly.HTMLElement) {
@@ -52,14 +76,23 @@ func Scrape(cf *Config) (visited map[string]string) {
 		fmt.Println("Error on visiting URL:", r.Request.URL, "failed with error:", err)
 	})
 
-	err := c.Visit(cf.StartAt)
+	err = c.Visit(cf.StartAt)
 	if err != nil {
 		log.Fatalln("Error on visit: ", err)
 	}
-	return
+
+	var pages []Page
+	for _, v := range visited {
+		pages = append(pages, v)
+	}
+	sort.Slice(pages, func(i, j int) bool {
+		return pages[i].URL < pages[j].URL
+	})
+
+	return pages
 }
 
-func onHTML(visited map[string]string, must func(string) bool) colly.HTMLCallback {
+func save(visited map[string]Page, pageConverter func(e *colly.HTMLElement) *Page) colly.HTMLCallback {
 	return func(e *colly.HTMLElement) {
 		url := e.Request.URL.String()
 		_, didVisit := visited[url]
@@ -67,10 +100,11 @@ func onHTML(visited map[string]string, must func(string) bool) colly.HTMLCallbac
 			return
 		}
 
-		if !must(url) {
+		var page = pageConverter(e)
+		if page == nil {
 			return
 		}
-		var text string = formatter.ExtractText(e)
-		visited[url] = text
+
+		visited[url] = *page
 	}
 }
