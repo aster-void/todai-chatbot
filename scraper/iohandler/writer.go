@@ -5,10 +5,10 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/aster-void/todai-chatbot/scraper/scraper"
+	"github.com/aster-void/todai-chatbot/scraper/common"
 )
 
-func WriteAll(group, content string, pages []scraper.Page) error {
+func WriteAll(group, content string, pages []common.Page) error {
 	_ = os.MkdirAll(filepath.Join("result", group), 0777)
 	f, err := os.Create(filepath.Join("result", group, content))
 	if err != nil {
