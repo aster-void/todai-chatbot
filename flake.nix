@@ -37,9 +37,9 @@
 
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [
+            gnumake
             go
             nodejs_22
-            husky
           ];
           shellHook = ''
             npm ci
