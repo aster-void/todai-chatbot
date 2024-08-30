@@ -1,9 +1,11 @@
-package scraper
+package common
 
 import (
 	"fmt"
 	"log"
+	"net/url"
 	"sort"
+	"strings"
 
 	"github.com/aster-void/todai-chatbot/scraper/formatter"
 	"github.com/go-playground/validator"
@@ -31,6 +33,12 @@ type Page struct {
 	Content string `json:"content"`
 }
 
+type PDFPage struct {
+	URL     string `json:"url"`
+	Title   string `json:"title"`
+	Content []byte `json:"content"`
+}
+
 func Scrape(cf *Config) []Page {
 	visited := make(map[string]Page)
 	validate := validator.New()
@@ -53,7 +61,8 @@ func Scrape(cf *Config) []Page {
 
 	// save all requested pages
 	convertPage := func(e *colly.HTMLElement) *Page {
-		var url = e.Request.URL.String()
+		var url = formatURL(e.Request.URL, cf)
+
 		if !cf.ResultPageMustSatisfy(e.Response) {
 			return nil
 		}
@@ -65,7 +74,7 @@ func Scrape(cf *Config) []Page {
 			Content: text,
 		}
 	}
-	c.OnHTML(cf.ResultPageContentSelector, save(visited, convertPage))
+	c.OnHTML(cf.ResultPageContentSelector, saveHTML(visited, convertPage))
 
 	// next page
 	c.OnHTML(cf.NextPageSelector, func(e *colly.HTMLElement) {
@@ -92,7 +101,18 @@ func Scrape(cf *Config) []Page {
 	return pages
 }
 
-func save(visited map[string]Page, pageConverter func(e *colly.HTMLElement) *Page) colly.HTMLCallback {
+func savePDFifFound(pdfs map[string]PDFPage, config *Config) colly.ResponseCallback {
+	return func(e *colly.Response) {
+		if e.Headers.Get("Content-Type") != "application/pdf" {
+			return
+		}
+		url := formatURL(e.Request.URL, config)
+		pdfs[url] = PDFPage{
+			URL: url,
+		}
+	}
+}
+func saveHTML(visited map[string]Page, pageConverter func(e *colly.HTMLElement) *Page) colly.HTMLCallback {
 	return func(e *colly.HTMLElement) {
 		url := e.Request.URL.String()
 		_, didVisit := visited[url]
@@ -107,4 +127,16 @@ func save(visited map[string]Page, pageConverter func(e *colly.HTMLElement) *Pag
 
 		visited[url] = *page
 	}
+}
+
+func formatURL(u *url.URL, cf *Config) string {
+	var url = u.String()
+	if strings.HasPrefix(url, "/") {
+		url = cf.Domain + url
+		url += "https://" + url
+	}
+	if !strings.HasPrefix(url, "https://"+cf.Domain) {
+		fmt.Println("WARNING: url doesn't match expected shape (which is https://$domain...)\n:", url)
+	}
+	return url
 }

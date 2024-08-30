@@ -1,18 +1,8 @@
-package main
+package utokyo
 
-import (
-	"regexp"
-
-	// "github.com/aster-void/todai-chatbot/scraper/database"
-	"github.com/aster-void/todai-chatbot/scraper/formatter"
-	"github.com/aster-void/todai-chatbot/scraper/iohandler"
-	"github.com/aster-void/todai-chatbot/scraper/scraper"
-	"github.com/gocolly/colly"
-)
-
-func ScrapeUTBASECircles() {
+func ScrapeNews() {
 	var utbase = "ut-base"
-	utbase_circles_regexp, err := regexp.Compile(`(https://ut-base.info)?\/circles.+`)
+	utbase_circles_regexp, err := regexp.Compile(`(https://www.c.u-tokyo.ac.jp)?\/circles.+`)
 	FatalErr(err)
 	result_page_regexp, err := regexp.Compile(`(https://ut-base.info)?\/circles\/\d+`)
 	FatalErr(err)
