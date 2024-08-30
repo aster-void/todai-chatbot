@@ -5,8 +5,8 @@
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
   };
-  #      it's destructured here 👇
-  outputs = { self, nixpkgs, flake-utils }:
+
+  outputs = { nixpkgs, flake-utils, ... }:
     # calling a function from `flake-utils` that takes a lambda
     # that takes the system we're targetting
     flake-utils.lib.eachDefaultSystem (system:
@@ -14,22 +14,31 @@
         # no need to define `system` anymore
         pkgs = nixpkgs.legacyPackages.${system};
       in
-      {
+      rec {
         # TODO: complete this
         # `eachDefaultSystem` transforms the input, our output set
         # now simply has `packages.default` which gets turned into
         # `packages.${system}.default` (for each system)
-        # packages.default = derivation {
+        # packages.todai-chatbot-server = {
         #   inherit system;
-        #   name = "todai-chatbot";
+        #   name = "todai-chatbot server";
         #   src = ./.;
-        #   buildInputs = [ ]; # doesn't work
-        #   builder = with pkgs; "${bash}/bin/bash";
-        #   args = [ "-c" "go build -t $out ." ];
+        #   buildInputs = [ ];
         # };
+
+        packages.todai-chatbot-scraper = pkgs.buildGo122Module {
+          inherit system;
+          name = "todai-chatbot scraper";
+          src = ./scraper;
+          vendorHash = "sha256-MmwMVWWCukJlRr0Lu75wAi9VDodJZ1CfFOvALp5QmeI=";
+        };
+
+        packages.default = packages.todai-chatbot-scraper;
+
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [
             go
+            nodejs_22
             husky
           ];
           shellHook = ''
