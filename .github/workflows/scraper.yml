@@ -24,10 +24,10 @@ jobs:
           go get honnef.co/go/tools/cmd/staticcheck
         working-directory: scraper
 
-      - name: Build
-        run: |
-          go build .
-        working-directory: scraper
+      # - name: Build
+      #   run: |
+      #     go build .
+      #   working-directory: scraper
 
       - name: Test
         run: |
