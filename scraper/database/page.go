@@ -9,6 +9,7 @@ import (
 
 type Page struct {
 	URL          string     `gorm:"url;primaryKey"`
+	Title        string     `gorm:"title"`
 	Content      string     `gorm:"content"`
 	Created      *time.Time `gorm:"created"`
 	RelatedWords []string

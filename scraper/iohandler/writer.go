@@ -1,25 +1,22 @@
 package iohandler
 
 import (
+	"encoding/json"
 	"os"
 	"path/filepath"
-	"strings"
+
+	"github.com/aster-void/todai-chatbot/scraper/common"
 )
 
-func WriteAll(group, content string, m map[string]string, formatter func(string) string) error {
-	_ = os.MkdirAll(filepath.Join("result", group, content), 0777)
-	for k, v := range m {
-		k = strings.TrimSuffix(k, "/")
-		var keys = strings.Split(k, "/")
-		var key = keys[len(keys)-1]
-		f, err := os.Create(filepath.Join("result", group, content, key))
-		if err != nil {
-			return err
-		}
-		_, err = f.WriteString(formatter(v))
-		if err != nil {
-			return err
-		}
+func WriteAll(group, content string, pages []common.Page) error {
+	_ = os.MkdirAll(filepath.Join("result", group), 0777)
+	f, err := os.Create(filepath.Join("result", group, content))
+	if err != nil {
+		return err
+	}
+	err = json.NewEncoder(f).Encode(&pages)
+	if err != nil {
+		return err
 	}
 	return nil
 }
