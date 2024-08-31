@@ -1,6 +1,6 @@
 import express from "express";
 import extractMessageKeywords from "../prompt/extractMessageKeywords";
-import fetchAndSelectPages from "../fetchAndSelectPages";
+import fetchAndSelectPages from "../domain/fetchAndSelectPages";
 const router = express.Router();
 
 router.post("/", async (req, res) => {
