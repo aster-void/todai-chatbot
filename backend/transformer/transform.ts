@@ -1,6 +1,5 @@
-import { PrismaClient } from "@prisma/client";
-
 import extractPageKeywords from "../prompt/extractPageKeyword";
+import createSummary from "../prompt/createSummary";
 
 type OutputPage = {
   url: string;
@@ -31,11 +30,10 @@ export async function transform(json: Input): Promise<Output> {
       return page;
     }));
   const pages = json.pages.concat(pagesFromPDF).map(async (page) => {
-    const keywords = await extractPageKeywords(page.content);
     const ret: OutputPage = {
       ...page,
-      words: keywords,
-      summary: "todo: summary",
+      words: await extractPageKeywords(page.content),
+      summary: await createSummary(page.content),
     };
     return ret;
   });
