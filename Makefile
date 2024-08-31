@@ -53,18 +53,14 @@ watch-frontend:
 watch-backend:
 	cd backend; npm run dev
 
-build: build-backend build-frontend
+build:build-frontend build-backend 
 
 build-frontend: 
-		cd frontend && npm run build
+	cd frontend && npm run build
 
 build-backend: 
-		cd backend && npm run build
+	cd backend && npm run build
 
 serve:
-	./target/main
-
-## Test
-## TODO: add test command
-make test:
+	node backend/target/main.js
 		
