@@ -34,9 +34,15 @@ export function MessageInput({ addMessage }: MessageInputProps) {
 
       const data = await res.json();
       // Add the bot's response to the chat
-      addMessage({ type: "bot", content: data.response || "No response from server" });
+      addMessage({
+        type: "bot",
+        content: data.response || "No response from server",
+      });
     } catch (error) {
-      addMessage({ type: "bot", content: "Error sending message: " + (error as Error).message });
+      addMessage({
+        type: "bot",
+        content: "Error sending message: " + (error as Error).message,
+      });
     } finally {
       setLoading(false); // Set loading to false when the request completes
     }

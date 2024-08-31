@@ -38,7 +38,8 @@ export function Chat() {
                 sx={{
                   display: "flex",
                   marginBottom: 1,
-                  justifyContent: message.type === "user" ? "flex-end" : "flex-start",
+                  justifyContent:
+                    message.type === "user" ? "flex-end" : "flex-start",
                 }}
               >
                 <Paper
@@ -49,7 +50,8 @@ export function Chat() {
                     borderRadius: 2,
                     boxShadow: 1,
                     border: 1,
-                    backgroundColor: message.type === "user" ? "#DCF8C6" : "#FFF",
+                    backgroundColor:
+                      message.type === "user" ? "#DCF8C6" : "#FFF",
                   }}
                 >
                   <Typography>{message.content}</Typography>
