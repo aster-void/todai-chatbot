@@ -1,4 +1,5 @@
 import express from "express";
+import messageRouter from "./router/chat";
 // import { ChatOpenAI } from "@langchain/openai";
 
 // LangChain の ChatOpenAI クラスは OPENAI_API_KEY 環境変数を自動的に参照する
@@ -23,17 +24,8 @@ app.get("/api/message", (req, res) => {
   res.json({ message: "Hello from Backend" });
 });
 
-// app.post("/chat", async (request, response) => {
-//   const promptText = request?.body?.promptText;
-//   // クライアントから送られてきたデータは無条件で信用しない
-//   if (typeof promptText !== "string") {
-//     response.sendStatus(400);
-//     return;
-//   }
-
-//   const aiMessageChunk = await chatModel.invoke(promptText);
-//   response.json({ content: aiMessageChunk.content });
-// });
+// ルーティング
+app.use("/send", messageRouter);
 
 app.listen(port, () => {
   console.log("backend is running on port", port);
