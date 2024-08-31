@@ -2,11 +2,12 @@ import { IconButton, Stack, TextField, CircularProgress } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { useState } from "react";
 
-type MessageInputProps = {
-  setResponse: (response: string) => void; // Define the type for setResponse prop
+interface MessageInputProps {
+  setResponse: (response: string) => void; // Function to set the server's response in the parent component
+  setRequest: (request: string) => void; // Function to set the user's message in the parent component
 }
 
-export function MessageInput({ setResponse }: MessageInputProps) {
+export function MessageInput({ setResponse, setRequest }: MessageInputProps) {
   const [message, setMessage] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false); // State to manage loading status
 
@@ -15,6 +16,7 @@ export function MessageInput({ setResponse }: MessageInputProps) {
 
     if (!message.trim()) return; // Prevent sending empty messages
 
+    setRequest(message); // Set the user's message in the parent component
     setLoading(true); // Set loading to true when the request starts
 
     try {
