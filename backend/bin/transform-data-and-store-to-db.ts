@@ -19,7 +19,7 @@ async function main(path: string) {
           words: page.words,
         },
       });
-    })
+    }),
   );
 }
 main("./data/ut-base/circles.json");

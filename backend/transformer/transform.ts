@@ -29,7 +29,7 @@ export async function transform(json: Input): Promise<Output> {
         content: await pdfParse(pdf.content),
       };
       return page;
-    })
+    }),
   );
   const pages = json.pages.concat(pagesFromPDF).map(async (page) => {
     const ret: OutputPage = {
