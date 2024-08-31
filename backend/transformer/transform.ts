@@ -1,5 +1,6 @@
 import extractPageKeywords from "../prompt/extractPageKeyword";
 import createSummary from "../prompt/createSummary";
+import { pdfParse } from "../prompt/summary-pdf";
 
 type OutputPage = {
   url: string;
@@ -25,7 +26,7 @@ export async function transform(json: Input): Promise<Output> {
     json.pdfs.map(async (pdf) => {
       const page = {
         ...pdf,
-        content: "todo: stringify pdf content",
+        content: await pdfParse(pdf.content),
       };
       return page;
     }),

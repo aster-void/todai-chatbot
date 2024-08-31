@@ -9,7 +9,7 @@ async function main() {
   const input = JSON.parse(data);
 
   const output = await transform(input);
-  // TOOD: store output to db
+
   await Promise.all(
     output.map(async (page) => {
       prisma.page.create({ data: page });
