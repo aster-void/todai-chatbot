@@ -7,10 +7,8 @@ router.post("/", async (req, res) => {
   const message: string = req.body.message;
   const keywords = await extractMessageKeywords(message);
   console.log(keywords);
-  const urls = await fetchAndSelectPages(keywords);
-  const url = urls[0];
-  console.log("url:" + url);
-  res.json(url);
+  const pages = await fetchAndSelectPages(keywords); //urlとsummaryをプロパティに持つオブジェクトの配列が返ってくる
+  res.json(pages.slice(0, 3));
 });
 
 export default router;

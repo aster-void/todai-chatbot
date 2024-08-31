@@ -32,13 +32,11 @@ export function MessageInput({ addMessage }: MessageInputProps) {
       if (!res.ok) {
         throw new Error("Failed to send message");
       }
-      const json = await res.text();
-      //console.log(json);
-      const data = JSON.parse(json);
+      const json = await res.json();
       // Add the bot's response to the chat
       addMessage({
         type: "bot",
-        content: data || "No response from server",
+        content: json || "No response from server",
       });
     } catch (error) {
       addMessage({
