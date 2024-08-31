@@ -27,6 +27,7 @@ export function MessageInput({ addMessage }: MessageInputProps) {
         },
         body: JSON.stringify({ message }),
       });
+      console.log(res.body)
 
       if (!res.ok) {
         throw new Error("Failed to send message");
