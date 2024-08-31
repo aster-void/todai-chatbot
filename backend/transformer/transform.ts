@@ -13,7 +13,7 @@ type InputPage = {
   title: string;
   lastUpdate: Date;
   content: string;
-}
+};
 type Input = {
   pages: InputPage[];
   pdfs: InputPage[];
@@ -28,7 +28,8 @@ export async function transform(json: Input): Promise<Output> {
         content: "todo: stringify pdf content",
       };
       return page;
-    }));
+    }),
+  );
   const pages = json.pages.concat(pagesFromPDF).map(async (page) => {
     const ret: OutputPage = {
       ...page,

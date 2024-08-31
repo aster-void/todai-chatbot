@@ -1,17 +1,19 @@
-import { PrismaClient } from "@prisma/client"
-import { transform } from "../transformer/transform"
-import fs from "node:fs"
+import { PrismaClient } from "@prisma/client";
+import { transform } from "../transformer/transform";
+import fs from "node:fs";
 
 const prisma = new PrismaClient();
 
 async function main() {
-  const data = fs.readFileSync('../data/scraped.json', "utf-8");
+  const data = fs.readFileSync("../data/scraped.json", "utf-8");
   const input = JSON.parse(data);
 
   const output = await transform(input);
   // TOOD: store output to db
-  await Promise.all(output.map(async (page) => {
-    prisma.page.create({ data: page });
-  }));
+  await Promise.all(
+    output.map(async (page) => {
+      prisma.page.create({ data: page });
+    }),
+  );
 }
 main();
