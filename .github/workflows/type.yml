@@ -4,9 +4,9 @@ on:
   push:
     branches: [main]
   pull_request:
-    
+
 jobs:
-  fmt:
+  types:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -20,7 +20,7 @@ jobs:
 
       - name: setup
         run: make setup
-      
+
       - name: Type Check front
         run: npx tsc --noEmit
         working-directory: frontend

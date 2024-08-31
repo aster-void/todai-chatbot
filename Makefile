@@ -1,6 +1,6 @@
 default: start
 
-# Setup
+## Setup
 setup: setup-frontend setup-backend setup-root huskey
 	echo "auto setup is done. now do:"
 	echo "- edit server/.env"
@@ -20,8 +20,38 @@ huskey:
 	npx husky
 	git checkout .husky
 
+## Static checks
+
+# code style
+lint:
+	cd backend; npx eslint .
+	cd frontend; npm run lint
+
+format:
+	npx prettier . --write
+
+format-check:
+	npx prettier . --check
+
+# type checks
+type-check: type-check-backend type-check-frontend
+
+type-check-backend:
+	cd backend; npx tsc --noEmit
+
+type-check-frontend:
+	cd frontend; npx tsc --noEmit
+
+
+## Runner
 watch:
-		(trap 'kill 0' SIGINT; (cd frontend && npm run dev) && (cd backend && npm run dev) & wait)
+		(trap 'kill 0' SIGINT; make watch-frontend & make watch-backend & wait)
+
+watch-frontend:
+	cd frontend; npm run dev
+
+watch-backend:
+	cd backend; npm run dev
 
 build: build-backend build-frontend
 
@@ -33,3 +63,8 @@ build-backend:
 
 serve:
 	./target/main
+
+## Test
+## TODO: add test command
+make test:
+		
