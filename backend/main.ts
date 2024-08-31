@@ -9,6 +9,7 @@ const app = express();
 // 使用するホスティングサービス (Render など) によってはリクエストを受け付けるポートが指定されている場合がある。
 // たいていの場合は PORT という名前の環境変数を通して参照できる。
 const port = process.env.PORT || 3000;
+app.use(express.urlencoded({ extended: true }));
 
 // 静的ファイルの提供
 app.use(express.static("./public"));

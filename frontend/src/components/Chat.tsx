@@ -1,12 +1,10 @@
 import { Avatar, Box, Paper, Typography } from "@mui/material";
 import { MessageInput } from "./MessageInput";
 import { deepOrange } from "@mui/material/colors";
+import { useState } from "react";
 
 export function Chat() {
-  // const sendMessage = async (msg: SendMessage): Promise<void> => {
-  //   await chat.sendDM(msg);
-  // };
-
+  const [response, setResponse] = useState<string>(""); 
   return (
     <>
       <Box
@@ -18,40 +16,36 @@ export function Chat() {
           width: "100%",
         }}
       >
-        {/* {messages ? ( */}
         <Avatar sx={{ bgcolor: deepOrange[500] }}>東大</Avatar>
         <Box sx={{ flexGrow: 1, overflowY: "auto", padding: 1 }}>
-          {/* {messages.map((m) => ( */}
-          <Box
-            // key={m.id}
-            sx={{
-              display: "flex",
-              // justifyContent: m.creator === id ? "flex-end" : "flex-start",
-              marginBottom: 1,
-            }}
-          >
-            <Paper
+          {/* Display the response if available */}
+          {response ? (
+            <Box
               sx={{
                 display: "flex",
-                maxWidth: "60%",
-                padding: 1,
-                borderRadius: 2,
-                // backgroundColor: m.creator === id ? "#DCF8C6" : "#FFF",
-                boxShadow: 1,
-                border: 1,
+                marginBottom: 1,
               }}
             >
-              <Typography>何かご質問はありますか？</Typography>
-              {/* <Typography>{m.content}</Typography> */}
-            </Paper>
-          </Box>
-          {/* ))} */}
+              <Paper
+                sx={{
+                  display: "flex",
+                  maxWidth: "60%",
+                  padding: 1,
+                  borderRadius: 2,
+                  boxShadow: 1,
+                  border: 1,
+                }}
+              >
+                <Typography>{response}</Typography>
+              </Paper>
+            </Box>
+          ) : (
+            <Typography>東大チャットbotに質問しましょう!</Typography>
+          )}
         </Box>
-        {/* ) : (
-          <Typography>東大チャットbotに質問しましょう!</Typography>
-        )} */}
 
-        <MessageInput /*send={sendDMMessage} room={room} */ />
+        {/* Pass setResponse as a prop to MessageInput */}
+        <MessageInput setResponse={setResponse} />
       </Box>
     </>
   );
