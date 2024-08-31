@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import "./App.css";
 import { Header } from "./components/Header";
-import { Chat } from "./components/Chat";
+import { Chat } from "./Chat";
 
 function App() {
   return (

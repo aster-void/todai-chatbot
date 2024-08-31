@@ -1,5 +1,5 @@
 import { Avatar, Box, Paper, Typography } from "@mui/material";
-import { MessageInput } from "./MessageInput";
+import { MessageInput } from "./components/MessageInput";
 import { deepOrange } from "@mui/material/colors";
 
 export function Chat() {
