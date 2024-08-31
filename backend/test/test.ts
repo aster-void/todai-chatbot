@@ -3,8 +3,8 @@ import extractPageKeywords from "../prompt/extractPageKeyword";
 import groupPages from "../prompt/groupPages";
 
 //テストのやり方
-// 1. npx tsc test.ts 
-// 2. node --env-file=../.env test.js 
+// 1. npx tsc test.ts
+// 2. node --env-file=../.env test.js
 
 //動作確認したい
 const exampleText = `電電と電情は何が違うの？`;
