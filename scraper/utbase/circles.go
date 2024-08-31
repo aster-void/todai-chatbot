@@ -29,8 +29,8 @@ func ScrapeCircles() {
 		ResultPageMustSatisfy: func(r *colly.Response) bool {
 			return result_page_regexp.MatchString(r.Request.URL.String())
 		},
-		TitleFormatter: func(r *colly.Response) string {
-			return "title"
+		TitleFormatter: func(e *colly.HTMLElement) string {
+			return e.ChildText("h1.js-toc-ignore")
 		},
 		ContentFormatter: formatter.UTBASE_CIRCLE,
 	})
