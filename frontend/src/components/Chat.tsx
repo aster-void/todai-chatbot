@@ -3,21 +3,13 @@ import { MessageInput } from "./MessageInput";
 import { deepOrange } from "@mui/material/colors";
 import { useState } from "react";
 
-// Define a type for messages
-type Message = {
+// Use the shared Message type defined earlier
+interface Message {
   type: "user" | "bot";
-  content: string;
-};
-
-// Function to check if a string is a URL
-const isURL = (str: string) => {
-  try {
-    new URL(str);
-    return true;
-  } catch (_) {
-    return false;
-  }
-};
+  content?: string;
+  url?: string;
+  summary?: string;
+}
 
 export function Chat() {
   const [messages, setMessages] = useState<Message[]>([]); // State to hold all messages
@@ -33,9 +25,10 @@ export function Chat() {
         sx={{
           display: "flex",
           flexDirection: "column",
-          height: "90%",
+          height: "100%",
           padding: 2,
           width: "100%",
+          marginBottom: "120px",
         }}
       >
         <Avatar sx={{ bgcolor: deepOrange[500] }}>東大</Avatar>
@@ -65,16 +58,23 @@ export function Chat() {
                   }}
                 >
                   {/* Check if the content is a URL and render it as a Link if so */}
-                  {isURL(message.content) ? (
-                    <Link
-                      href={message.content}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {message.content}
-                    </Link>
+                  {message.url ? (
+                    <>
+                      <Box sx={{ display: "flex", flexDirection: "column" }}>
+                        <Link
+                          href={message.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {message.url}
+                        </Link>
+                        {message.summary}
+                      </Box>
+                    </>
                   ) : (
-                    <Typography>{message.content}</Typography>
+                    <Typography>
+                      {message.summary || message.content}
+                    </Typography>
                   )}
                 </Paper>
               </Box>

@@ -2,8 +2,14 @@ import { IconButton, Stack, TextField, CircularProgress } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { useState } from "react";
 
+interface Message {
+  type: "user" | "bot";
+  content?: string;
+  url?: string;
+  summary?: string;
+}
 interface MessageInputProps {
-  addMessage: (message: { type: "user" | "bot"; content: string }) => void; // Function to add messages to the parent state
+  addMessage: (message: Message) => void; // Function to add messages to the parent state
 }
 
 export function MessageInput({ addMessage }: MessageInputProps) {
@@ -27,18 +33,18 @@ export function MessageInput({ addMessage }: MessageInputProps) {
         },
         body: JSON.stringify({ message }),
       });
-      //console.log(res.body);
 
       if (!res.ok) {
         throw new Error("Failed to send message");
       }
-      const json = await res.text();
-      //console.log(json);
-      const data = JSON.parse(json);
-      // Add the bot's response to the chat
-      addMessage({
-        type: "bot",
-        content: data || "No response from server",
+      //responseとして、{url: string, summary: string}[]が返ってくるので、それをフォーマットして、stringに変換して、contentに設定したい
+      const data = await res.json();
+      data.forEach((page: { url: string; summary: string }) => {
+        addMessage({
+          type: "bot",
+          url: page.url,
+          summary: page.summary,
+        });
       });
     } catch (error) {
       addMessage({

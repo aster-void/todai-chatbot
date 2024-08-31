@@ -7,13 +7,10 @@ function App() {
   return (
     <>
       <Box
-        display="flex"
-        flexDirection="column"
         alignItems="center"
-        justifyContent="center"
-        width="100%"
-        height="100vh"
-        bgcolor="#f5f5f5"
+        justifyContent="flex-start" // Headerを最上部に配置
+        height="700px" // ビューポートの高さを設定
+        width="1200px"
       >
         <Header />
         <Chat />
