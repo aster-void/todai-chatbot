@@ -62,7 +62,7 @@ build-backend:
 		cd backend && npm run build
 
 serve:
-	./target/main
+		node backend/target/main.js
 
 ## Test
 ## TODO: add test command

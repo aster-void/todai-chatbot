@@ -11,15 +11,10 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // 静的ファイルの提供
-app.use(express.static(path.join(__dirname, "../../public")));
+app.use(express.static("./public"));
 
 // リクエストボディを JSON として解釈して request.body に格納する
 app.use(express.json());
-
-// ルートハンドラー
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../public", "index.html"));
-});
 
 app.get("/", (req, res) => {
   res.send("Hello Express!");
