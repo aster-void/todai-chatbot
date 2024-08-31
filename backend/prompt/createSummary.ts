@@ -3,7 +3,7 @@ const openai = new OpenAI();
 
 export default async function createSummary(passage: string): Promise<string> {
   try {
-    const content = `以下の文章を一文で要約してください。
+    const content = `以下の文章を簡潔に一文で要約してください。「この文章は」などの説明は不要です。
           ######
           ${passage}`;
     const response = await openai.chat.completions.create({

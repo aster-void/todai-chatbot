@@ -2,6 +2,7 @@ import extractMessageKeywords from "../prompt/extractMessageKeywords";
 import extractPageKeywords from "../prompt/extractPageKeyword";
 import groupPages from "../prompt/groupPages";
 import createSummary from "../prompt/createSummary";
+import { readFileSync } from "node:fs";
 
 //テストのやり方
 // 1. npx tsc test.ts
@@ -54,6 +55,5 @@ async function testGroupPages() {
 
 testGroupPages();
 
-const passage =
-  "これはテストのための文章です。OpenAI APIを使用して、この文章を一文で要約してください。";
+const passage = readFileSync("backend/test/sample.txt", "utf-8");
 createSummary(passage).then((summary) => console.log(summary));
