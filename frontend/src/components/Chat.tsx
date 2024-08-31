@@ -59,14 +59,16 @@ export function Chat() {
                   {/* Check if the content is a URL and render it as a Link if so */}
                   {message.url ? (
                     <>
-                      <Link
-                        href={message.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {message.url}
-                      </Link>
-                      {message.summary}
+                      <Box sx={{ display: "flex", flexDirection: "column" }}>
+                        <Link
+                          href={message.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {message.url}
+                        </Link>
+                        {message.summary}
+                      </Box>
                     </>
                   ) : (
                     <Typography>
