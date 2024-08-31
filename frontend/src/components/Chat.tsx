@@ -53,18 +53,21 @@ export function Chat() {
                     boxShadow: 1,
                     border: 1,
                     backgroundColor:
-                    message.type === "user" ? "#DCF8C6" : "#FFF",
+                      message.type === "user" ? "#DCF8C6" : "#FFF",
                   }}
                 >
                   {/* Check if the content is a URL and render it as a Link if so */}
                   {message.url ? (
-                    <Link
-                      href={message.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {message.url}
-                    </Link>
+                    <>
+                      <Link
+                        href={message.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {message.url}
+                      </Link>
+                      {message.summary}
+                    </>
                   ) : (
                     <Typography>
                       {message.summary || message.content}

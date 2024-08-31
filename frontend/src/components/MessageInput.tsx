@@ -46,7 +46,6 @@ export function MessageInput({ addMessage }: MessageInputProps) {
           summary: page.summary,
         });
       });
-
     } catch (error) {
       addMessage({
         type: "bot",
