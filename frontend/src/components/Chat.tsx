@@ -36,7 +36,7 @@ export function Chat() {
           height: "100%",
           padding: 2,
           width: "100%",
-          marginBottom: "120px"
+          marginBottom: "120px",
         }}
       >
         <Avatar sx={{ bgcolor: deepOrange[500] }}>東大</Avatar>
@@ -67,7 +67,11 @@ export function Chat() {
                 >
                   {/* Check if the content is a URL and render it as a Link if so */}
                   {isURL(message.content) ? (
-                    <Link href={message.content} target="_blank" rel="noopener noreferrer">
+                    <Link
+                      href={message.content}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       {message.content}
                     </Link>
                   ) : (
