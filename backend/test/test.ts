@@ -1,6 +1,7 @@
 import extractMessageKeywords from "../prompt/extractMessageKeywords";
 import extractPageKeywords from "../prompt/extractPageKeyword";
 import groupPages from "../prompt/groupPages";
+import createSummary from "../prompt/createSummary";
 
 //テストのやり方
 // 1. npx tsc test.ts
@@ -52,3 +53,6 @@ async function testGroupPages() {
 }
 
 testGroupPages();
+
+const passage = "これはテストのための文章です。OpenAI APIを使用して、この文章を一文で要約してください。";
+createSummary(passage).then(summary => console.log(summary));
