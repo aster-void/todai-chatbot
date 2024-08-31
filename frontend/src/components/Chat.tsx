@@ -1,4 +1,4 @@
-import { Avatar, Box, Paper, Typography } from "@mui/material";
+import { Avatar, Box, Paper, Typography, Link } from "@mui/material";
 import { MessageInput } from "./MessageInput";
 import { deepOrange } from "@mui/material/colors";
 import { useState } from "react";
@@ -7,6 +7,16 @@ import { useState } from "react";
 type Message = {
   type: "user" | "bot";
   content: string;
+};
+
+// Function to check if a string is a URL
+const isURL = (str: string) => {
+  try {
+    new URL(str);
+    return true;
+  } catch (_) {
+    return false;
+  }
 };
 
 export function Chat() {
@@ -54,7 +64,14 @@ export function Chat() {
                       message.type === "user" ? "#DCF8C6" : "#FFF",
                   }}
                 >
-                  <Typography>{message.content}</Typography>
+                  {/* Check if the content is a URL and render it as a Link if so */}
+                  {isURL(message.content) ? (
+                    <Link href={message.content} target="_blank" rel="noopener noreferrer">
+                      {message.content}
+                    </Link>
+                  ) : (
+                    <Typography>{message.content}</Typography>
+                  )}
                 </Paper>
               </Box>
             ))

@@ -1,3 +1,5 @@
 /node_modules
 /.env
 /target
+/test/test.js
+/test/sample.txt

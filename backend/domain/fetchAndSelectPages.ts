@@ -23,7 +23,9 @@ export default async function fetchAndSelectPages(
     const selectedPages: Page[] = pages
       .map((page: Page) => {
         const matchingKeywords = keywords.filter((keyword: string) =>
-          page.words.some((word: string) => word.includes(keyword)),
+          page.words.some(
+            (word: string) => word.includes(keyword) || keyword.includes(word),
+          ),
         );
         return {
           ...page,
