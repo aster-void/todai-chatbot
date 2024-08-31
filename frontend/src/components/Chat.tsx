@@ -1,11 +1,21 @@
 import { Avatar, Box, Paper, Typography } from "@mui/material";
 import { MessageInput } from "./MessageInput";
 import { deepOrange } from "@mui/material/colors";
+import { useState } from "react";
+
+// Define a type for messages
+type Message = {
+  type: "user" | "bot";
+  content: string;
+};
 
 export function Chat() {
-  // const sendMessage = async (msg: SendMessage): Promise<void> => {
-  //   await chat.sendDM(msg);
-  // };
+  const [messages, setMessages] = useState<Message[]>([]); // State to hold all messages
+
+  // Function to handle adding a new message
+  const addMessage = (message: Message) => {
+    setMessages((prevMessages) => [...prevMessages, message]);
+  };
 
   return (
     <>
@@ -18,40 +28,43 @@ export function Chat() {
           width: "100%",
         }}
       >
-        {/* {messages ? ( */}
         <Avatar sx={{ bgcolor: deepOrange[500] }}>東大</Avatar>
         <Box sx={{ flexGrow: 1, overflowY: "auto", padding: 1 }}>
-          {/* {messages.map((m) => ( */}
-          <Box
-            // key={m.id}
-            sx={{
-              display: "flex",
-              // justifyContent: m.creator === id ? "flex-end" : "flex-start",
-              marginBottom: 1,
-            }}
-          >
-            <Paper
-              sx={{
-                display: "flex",
-                maxWidth: "60%",
-                padding: 1,
-                borderRadius: 2,
-                // backgroundColor: m.creator === id ? "#DCF8C6" : "#FFF",
-                boxShadow: 1,
-                border: 1,
-              }}
-            >
-              <Typography>何かご質問はありますか？</Typography>
-              {/* <Typography>{m.content}</Typography> */}
-            </Paper>
-          </Box>
-          {/* ))} */}
+          {/* Map through the messages array and display each message */}
+          {messages.length > 0 ? (
+            messages.map((message, index) => (
+              <Box
+                key={index}
+                sx={{
+                  display: "flex",
+                  marginBottom: 1,
+                  justifyContent:
+                    message.type === "user" ? "flex-end" : "flex-start",
+                }}
+              >
+                <Paper
+                  sx={{
+                    display: "flex",
+                    maxWidth: "60%",
+                    padding: 1,
+                    borderRadius: 2,
+                    boxShadow: 1,
+                    border: 1,
+                    backgroundColor:
+                      message.type === "user" ? "#DCF8C6" : "#FFF",
+                  }}
+                >
+                  <Typography>{message.content}</Typography>
+                </Paper>
+              </Box>
+            ))
+          ) : (
+            <Typography>東大チャットbotに質問しましょう!</Typography>
+          )}
         </Box>
-        {/* ) : (
-          <Typography>東大チャットbotに質問しましょう!</Typography>
-        )} */}
 
-        <MessageInput /*send={sendDMMessage} room={room} */ />
+        {/* Pass the addMessage function as props to MessageInput */}
+        <MessageInput addMessage={addMessage} />
       </Box>
     </>
   );
