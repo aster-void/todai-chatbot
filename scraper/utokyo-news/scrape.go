@@ -95,10 +95,11 @@ func ScrapeNews() ([]common.Page, []common.PDF) {
 		}
 
 		var content = e.ChildText("*")
+		var unix = lastUpdate.Unix()
 		url_page[url] = common.Page{
 			URL:        url,
 			Title:      title,
-			LastUpdate: lastUpdate,
+			LastUpdate: &unix,
 			Content:    content,
 		}
 	})

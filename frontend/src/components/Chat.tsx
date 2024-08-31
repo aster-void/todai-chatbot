@@ -58,7 +58,6 @@ export function Chat() {
                   }}
                 >
                   {/* Check if the content is a URL and render it as a Link if so */}
-
                   {message.url ? (
                     <>
                       <Box sx={{ display: "flex", flexDirection: "column" }}>
