@@ -3,6 +3,7 @@ module github.com/aster-void/todai-chatbot/scraper
 go 1.22.5
 
 require (
+	github.com/PuerkitoBio/goquery v1.9.2
 	github.com/go-playground/validator v9.31.0+incompatible
 	github.com/gocolly/colly v1.2.0
 	github.com/joho/godotenv v1.5.1
@@ -11,7 +12,6 @@ require (
 )
 
 require (
-	github.com/PuerkitoBio/goquery v1.9.2 // indirect
 	github.com/andybalholm/cascadia v1.3.2 // indirect
 	github.com/antchfx/htmlquery v1.3.2 // indirect
 	github.com/antchfx/xmlquery v1.4.1 // indirect

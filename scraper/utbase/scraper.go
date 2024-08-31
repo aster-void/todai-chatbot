@@ -6,8 +6,8 @@ import (
 	"net/url"
 	"sort"
 	"strings"
-	"time"
 
+	"github.com/aster-void/todai-chatbot/scraper/common"
 	"github.com/aster-void/todai-chatbot/scraper/formatter"
 	"github.com/go-playground/validator"
 	"github.com/gocolly/colly"
@@ -28,22 +28,8 @@ type Config struct {
 	ContentFormatter          func(string) string `validate:"required"`
 }
 
-type Page struct {
-	URL        string     `json:"url"`
-	Title      string     `json:"title"`
-	LastUpdate *time.Time `json:"last_update"`
-	Content    string     `json:"content"`
-}
-
-type PDFPage struct {
-	URL        string     `json:"url"`
-	Title      string     `json:"title"`
-	LastUpdate *time.Time `json:"last_update"`
-	Content    []byte     `json:"content"`
-}
-
-func Scrape(cf *Config) []Page {
-	visited := make(map[string]Page)
+func Scrape(cf *Config) []common.Page {
+	visited := make(map[string]common.Page)
 	validate := validator.New()
 	err := validate.Struct(cf)
 	if err != nil {
@@ -63,7 +49,7 @@ func Scrape(cf *Config) []Page {
 	})
 
 	// save all requested pages
-	convertPage := func(e *colly.HTMLElement) *Page {
+	convertPage := func(e *colly.HTMLElement) *common.Page {
 		var url = formatURL(e.Request.URL, cf)
 
 		if !cf.ResultPageMustSatisfy(e.Response) {
@@ -71,7 +57,7 @@ func Scrape(cf *Config) []Page {
 		}
 		var text string = formatter.ExtractText(e)
 		text = cf.ContentFormatter(text)
-		return &Page{
+		return &common.Page{
 			URL:     url,
 			Title:   cf.TitleFormatter(e),
 			Content: text,
@@ -93,7 +79,7 @@ func Scrape(cf *Config) []Page {
 		log.Fatalln("Error on visit: ", err)
 	}
 
-	var pages []Page
+	var pages []common.Page
 	for _, v := range visited {
 		pages = append(pages, v)
 	}
@@ -104,18 +90,18 @@ func Scrape(cf *Config) []Page {
 	return pages
 }
 
-func savePDFifFound(pdfs map[string]PDFPage, config *Config) colly.ResponseCallback {
+func savePDFifFound(pdfs map[string]common.PDF, config *Config) colly.ResponseCallback {
 	return func(e *colly.Response) {
 		if e.Headers.Get("Content-Type") != "application/pdf" {
 			return
 		}
 		url := formatURL(e.Request.URL, config)
-		pdfs[url] = PDFPage{
+		pdfs[url] = common.PDF{
 			URL: url,
 		}
 	}
 }
-func saveHTML(visited map[string]Page, pageConverter func(e *colly.HTMLElement) *Page) colly.HTMLCallback {
+func saveHTML(visited map[string]common.Page, pageConverter func(e *colly.HTMLElement) *common.Page) colly.HTMLCallback {
 	return func(e *colly.HTMLElement) {
 		url := e.Request.URL.String()
 		_, didVisit := visited[url]

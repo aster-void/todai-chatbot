@@ -33,6 +33,5 @@ func ScrapeCircles() {
 		},
 		ContentFormatter: formatter.UTBASE_CIRCLE,
 	})
-	err = iohandler.WriteAll("ut-base", "circles.json", utbase_circles)
-	utils.FatalErr(err)
+	iohandler.WriteAll("ut-base", "circles", utbase_circles, nil)
 }
