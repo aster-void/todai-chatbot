@@ -1,4 +1,4 @@
-import express, { json } from "express";
+import express from "express";
 import extractMessageKeywords from "../prompt/extractMessageKeywords";
 import fetchAndSelectPages from "../fetchAndSelectPages";
 const router = express.Router();
