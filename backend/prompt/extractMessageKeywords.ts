@@ -5,6 +5,10 @@ export default async function extractMessageKeywords(
   message: string,
 ): Promise<string[]> {
   try {
+    const content = `以下のメッセージから特に重要な単語をいくつか抽出し、カンマ区切りで返してください。
+          ######
+          ${message}`
+    console.log(message);
     const response = await openai.chat.completions.create({
       model: "gpt-4o",
       messages: [
@@ -14,9 +18,7 @@ export default async function extractMessageKeywords(
         },
         {
           role: "user",
-          content: `以下のメッセージから特に重要な単語をいくつか抽出し、カンマ区切りで返してください。
-          ######
-          ${message}`,
+          content: content,
         },
       ],
       max_tokens: 50,
