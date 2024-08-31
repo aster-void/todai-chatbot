@@ -39,13 +39,20 @@ export function MessageInput({ addMessage }: MessageInputProps) {
       }
       //responseとして、{url: string, summary: string}[]が返ってくるので、それをフォーマットして、stringに変換して、contentに設定したい
       const data = await res.json();
-      data.forEach((page: { url: string; summary: string }) => {
+      if (data.length === 0) {
         addMessage({
           type: "bot",
-          url: page.url,
-          summary: page.summary,
+          content: "該当するデータがありません",
         });
-      });
+      } else {
+        data.forEach((page: { url: string; summary: string }) => {
+          addMessage({
+            type: "bot",
+            url: page.url,
+            summary: page.summary,
+          });
+        });
+      }
     } catch (error) {
       addMessage({
         type: "bot",
