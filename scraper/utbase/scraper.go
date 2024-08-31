@@ -6,6 +6,7 @@ import (
 	"net/url"
 	"sort"
 	"strings"
+	"time"
 
 	"github.com/aster-void/todai-chatbot/scraper/formatter"
 	"github.com/go-playground/validator"
@@ -28,15 +29,17 @@ type Config struct {
 }
 
 type Page struct {
-	URL     string `json:"url"`
-	Title   string `json:"title"`
-	Content string `json:"content"`
+	URL        string     `json:"url"`
+	Title      string     `json:"title"`
+	LastUpdate *time.Time `json:"last_update"`
+	Content    string     `json:"content"`
 }
 
 type PDFPage struct {
-	URL     string `json:"url"`
-	Title   string `json:"title"`
-	Content []byte `json:"content"`
+	URL        string     `json:"url"`
+	Title      string     `json:"title"`
+	LastUpdate *time.Time `json:"last_update"`
+	Content    []byte     `json:"content"`
 }
 
 func Scrape(cf *Config) []Page {
