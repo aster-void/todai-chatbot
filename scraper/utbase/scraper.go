@@ -90,17 +90,6 @@ func Scrape(cf *Config) []common.Page {
 	return pages
 }
 
-func savePDFifFound(pdfs map[string]common.PDF, config *Config) colly.ResponseCallback {
-	return func(e *colly.Response) {
-		if e.Headers.Get("Content-Type") != "application/pdf" {
-			return
-		}
-		url := formatURL(e.Request.URL, config)
-		pdfs[url] = common.PDF{
-			URL: url,
-		}
-	}
-}
 func saveHTML(visited map[string]common.Page, pageConverter func(e *colly.HTMLElement) *common.Page) colly.HTMLCallback {
 	return func(e *colly.HTMLElement) {
 		url := e.Request.URL.String()
