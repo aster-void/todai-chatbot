@@ -20,7 +20,7 @@ type Config struct {
 	PathsMustSatisfy      func(string) bool          `validate:"required"`
 	ResultPageMustSatisfy func(*colly.Response) bool `validate:"required"`
 
-	TitleFormatter func(*colly.Response) string `validate:"required"`
+	TitleFormatter func(*colly.HTMLElement) string `validate:"required"`
 
 	ResultPageLinkSelector    string              `validate:"required"`
 	ResultPageContentSelector string              `validate:"required"`
@@ -70,7 +70,7 @@ func Scrape(cf *Config) []Page {
 		text = cf.ContentFormatter(text)
 		return &Page{
 			URL:     url,
-			Title:   cf.TitleFormatter(e.Response),
+			Title:   cf.TitleFormatter(e),
 			Content: text,
 		}
 	}
