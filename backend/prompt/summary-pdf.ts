@@ -1,11 +1,9 @@
-import { OpenAI } from "openai";
+// import { OpenAI } from "openai";
 import pdf from "pdf-parse";
-import fs from "fs";
-import path from "path";
 
-const openai = new OpenAI({
-  apiKey: process.env.OPEN_API_KEY,
-});
+// const openai = new OpenAI({
+//   apiKey: process.env.OPEN_API_KEY,
+// });
 
 export async function pdfParse(base64: string) {
   const buffer = Buffer.from(base64, "base64");
