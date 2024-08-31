@@ -3,21 +3,13 @@ import { MessageInput } from "./MessageInput";
 import { deepOrange } from "@mui/material/colors";
 import { useState } from "react";
 
-// Define a type for messages
-type Message = {
+// Use the shared Message type defined earlier
+interface Message {
   type: "user" | "bot";
-  content: string;
-};
-
-// Function to check if a string is a URL
-const isURL = (str: string) => {
-  try {
-    new URL(str);
-    return true;
-  } catch (_) {
-    return false;
-  }
-};
+  content?: string;
+  url?: string;
+  summary?: string;
+}
 
 export function Chat() {
   const [messages, setMessages] = useState<Message[]>([]); // State to hold all messages
@@ -61,20 +53,22 @@ export function Chat() {
                     boxShadow: 1,
                     border: 1,
                     backgroundColor:
-                      message.type === "user" ? "#DCF8C6" : "#FFF",
+                    message.type === "user" ? "#DCF8C6" : "#FFF",
                   }}
                 >
                   {/* Check if the content is a URL and render it as a Link if so */}
-                  {isURL(message.content) ? (
+                  {message.url ? (
                     <Link
-                      href={message.content}
+                      href={message.url}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      {message.content}
+                      {message.url}
                     </Link>
                   ) : (
-                    <Typography>{message.content}</Typography>
+                    <Typography>
+                      {message.summary || message.content}
+                    </Typography>
                   )}
                 </Paper>
               </Box>
