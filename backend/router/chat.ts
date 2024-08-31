@@ -7,7 +7,7 @@ router.post("/", async (req, res) => {
   const message: string = req.body;
   const keywords = await extractMessageKeywords(message);
   const urls = await fetchAndSelectPages(keywords);
-  const url = urls[0]
+  const url = urls[0];
   res.json(url);
 });
 
