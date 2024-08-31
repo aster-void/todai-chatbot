@@ -32,7 +32,8 @@ export function MessageInput({ addMessage }: MessageInputProps) {
       if (!res.ok) {
         throw new Error("Failed to send message");
       }
-      const json = await res.json();
+      const json = await res.text();
+      //const data = JSON.parse(json);
       // Add the bot's response to the chat
       addMessage({
         type: "bot",
