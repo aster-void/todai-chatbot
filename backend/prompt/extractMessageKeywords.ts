@@ -7,7 +7,7 @@ export default async function extractMessageKeywords(
   try {
     const content = `以下のメッセージから特に重要な単語をいくつか抽出し、カンマ区切りで返してください。
           ######
-          ${message}`
+          ${message}`;
     console.log(message);
     const response = await openai.chat.completions.create({
       model: "gpt-4o",
