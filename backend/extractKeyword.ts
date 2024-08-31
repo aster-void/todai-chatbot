@@ -9,7 +9,9 @@ export default async function extractKeywords(text: string): Promise<string[]> {
         { role: "system", content: "あなたは記事のレビュアーです。" },
         {
           role: "user",
-          content: `以下の記事から学生にとって特に重要な単語をいくつか抽出し、カンマ区切りで返してください。${text}`,
+          content: `以下の記事から学生にとって特に重要な単語をいくつか抽出し、カンマ区切りで返してください。
+          ######
+          ${text}`,
         },
       ],
       max_tokens: 50,
