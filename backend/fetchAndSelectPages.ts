@@ -19,7 +19,7 @@ export default async function fetchAndSelectPages(
       },
     });
 
-    //keywordsの少なくとも一つがpage.wordsの少なくとも一つと一致するpageを持ってくる
+    //keywordsの少なくとも一つがpage.wordsの少なくとも一つに部分的に含まれるpageを持ってくる
     //関連性でソートするためには修正する必要がある
     const selectedPages: Page[] = pages.filter((page: Page) =>
       keywords.some((keyword: string) =>
