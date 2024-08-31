@@ -3,11 +3,10 @@ import SendIcon from "@mui/icons-material/Send";
 import { useState } from "react";
 
 interface MessageInputProps {
-  setResponse: (response: string) => void; // Function to set the server's response in the parent component
-  setRequest: (request: string) => void; // Function to set the user's message in the parent component
+  addMessage: (message: { type: "user" | "bot"; content: string }) => void; // Function to add messages to the parent state
 }
 
-export function MessageInput({ setResponse, setRequest }: MessageInputProps) {
+export function MessageInput({ addMessage }: MessageInputProps) {
   const [message, setMessage] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false); // State to manage loading status
 
@@ -16,7 +15,8 @@ export function MessageInput({ setResponse, setRequest }: MessageInputProps) {
 
     if (!message.trim()) return; // Prevent sending empty messages
 
-    setRequest(message); // Set the user's message in the parent component
+    // Add the user's message to the chat
+    addMessage({ type: "user", content: message });
     setLoading(true); // Set loading to true when the request starts
 
     try {
@@ -33,9 +33,10 @@ export function MessageInput({ setResponse, setRequest }: MessageInputProps) {
       }
 
       const data = await res.json();
-      setResponse(data.response || "No response from server");
+      // Add the bot's response to the chat
+      addMessage({ type: "bot", content: data.response || "No response from server" });
     } catch (error) {
-      setResponse("Error sending message: " + (error as Error).message);
+      addMessage({ type: "bot", content: "Error sending message: " + (error as Error).message });
     } finally {
       setLoading(false); // Set loading to false when the request completes
     }
