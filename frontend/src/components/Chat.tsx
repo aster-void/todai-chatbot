@@ -25,9 +25,10 @@ export function Chat() {
         sx={{
           display: "flex",
           flexDirection: "column",
-          height: "90%",
+          height: "100%",
           padding: 2,
           width: "100%",
+          marginBottom: "120px",
         }}
       >
         <Avatar sx={{ bgcolor: deepOrange[500] }}>東大</Avatar>
@@ -57,6 +58,7 @@ export function Chat() {
                   }}
                 >
                   {/* Check if the content is a URL and render it as a Link if so */}
+
                   {message.url ? (
                     <>
                       <Box sx={{ display: "flex", flexDirection: "column" }}>
