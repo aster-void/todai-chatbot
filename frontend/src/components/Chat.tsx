@@ -66,7 +66,11 @@ export function Chat() {
                 >
                   {/* Check if the content is a URL and render it as a Link if so */}
                   {isURL(message.content) ? (
-                    <Link href={message.content} target="_blank" rel="noopener noreferrer">
+                    <Link
+                      href={message.content}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       {message.content}
                     </Link>
                   ) : (

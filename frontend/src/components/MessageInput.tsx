@@ -32,12 +32,18 @@ export function MessageInput({ addMessage }: MessageInputProps) {
       if (!res.ok) {
         throw new Error("Failed to send message");
       }
-      const json = await res.text();
-      //const data = JSON.parse(json);
+      //responseとして、{url: string, summary: string}[]が返ってくるので、それをフォーマットして、stringに変換して、contentに設定したい
+      const data = await res.json();
+      const formattedResponse = data
+        .map(
+          (page: { url: string; summary: string }) =>
+            `URL: ${page.url}\nSummary: ${page.summary}`,
+        )
+        .join("\n\n");
       // Add the bot's response to the chat
       addMessage({
         type: "bot",
-        content: json || "No response from server",
+        content: formattedResponse || "No response from server",
       });
     } catch (error) {
       addMessage({

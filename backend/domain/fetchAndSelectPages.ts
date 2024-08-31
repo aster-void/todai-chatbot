@@ -11,7 +11,7 @@ type Page = {
 type ReturnedPages = {
   url: string;
   summary: string;
-}
+};
 
 // 単語のまとまりについて関連性が高いページの配列を返す
 export default async function fetchAndSelectPages(
