@@ -6,7 +6,9 @@
   "target": "ex2017",
   "dependencies": {
     "husky": "^9.1.5",
-    "pdf-parse": "^1.1.1"
+    "pdf-parse": "^1.1.1",
+    "openai": "^4.56.0",
+    "typescript": "^5.5.4"
   },
   "scripts": {
     "prepare": "husky"
