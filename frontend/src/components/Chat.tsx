@@ -20,9 +20,14 @@ export function Chat() {
       >
         <Avatar sx={{ bgcolor: deepOrange[500] }}>東大</Avatar>
         <Box sx={{ flexGrow: 1, overflowY: "auto", padding: 1 }}>
-          {/* Display the user's message if available */}
           {request && (
-            <Box sx={{ display: "flex", marginBottom: 1 }}>
+            <Box
+              sx={{
+                display: "flex",
+                marginBottom: 1,
+                justifyContent: "flex-end",
+              }}
+            >
               <Paper
                 sx={{
                   display: "flex",
@@ -39,9 +44,14 @@ export function Chat() {
             </Box>
           )}
 
-          {/* Display the server's response if available */}
           {response && (
-            <Box sx={{ display: "flex", marginBottom: 1 }}>
+            <Box
+              sx={{
+                display: "flex",
+                marginBottom: 1,
+                justifyContent: "flex-start",
+              }}
+            >
               <Paper
                 sx={{
                   display: "flex",
