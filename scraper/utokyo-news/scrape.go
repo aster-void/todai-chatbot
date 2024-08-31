@@ -88,14 +88,17 @@ func ScrapeNews() ([]common.Page, []common.PDF) {
 		}
 		var title = doc.Find("head>title").Text()
 		var datestr = doc.Find("#newslist2").ChildrenFiltered("p").First().Text()
+		var unix int64
 		lastUpdate, err := parseDateOnly(datestr)
 		// skip old articles
 		if err == nil && time.Since(*lastUpdate) > year {
 			return
 		}
+		if err == nil {
+			unix = lastUpdate.Unix()
+		}
 
 		var content = e.ChildText("*")
-		var unix = lastUpdate.Unix()
 		url_page[url] = common.Page{
 			URL:        url,
 			Title:      title,

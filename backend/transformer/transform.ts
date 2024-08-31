@@ -23,13 +23,13 @@ type Output = OutputPage[];
 
 export async function transform(json: Input): Promise<Output> {
   const pagesFromPDF = await Promise.all(
-    json.pdfs.map(async (pdf) => {
+    (json.pdfs || []).map(async (pdf) => {
       const page = {
         ...pdf,
         content: await pdfParse(pdf.content),
       };
       return page;
-    }),
+    })
   );
   const pages = json.pages.concat(pagesFromPDF).map(async (page) => {
     const ret: OutputPage = {

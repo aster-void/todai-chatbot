@@ -17,7 +17,7 @@ model Page {
   id         Int       @id @default(autoincrement())
   url        String
   title      String
-  lastUpdate DateTime 
+  lastUpdate DateTime? 
   summary    String
   words      String[] 
 }
