@@ -8,10 +8,9 @@ function App() {
     <>
       <Box
         alignItems="center"
-        justifyContent="center"
-        width="1300px"
-        height="600px"
-        bgcolor="#f5f5f5"
+        justifyContent="flex-start" // Headerを最上部に配置
+        height="700px" // ビューポートの高さを設定
+        width="1200px"
       >
         <Header />
         <Chat />

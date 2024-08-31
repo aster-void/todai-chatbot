@@ -36,6 +36,7 @@ export function Chat() {
           height: "100%",
           padding: 2,
           width: "100%",
+          marginBottom: "120px"
         }}
       >
         <Avatar sx={{ bgcolor: deepOrange[500] }}>東大</Avatar>
