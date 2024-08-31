@@ -62,5 +62,7 @@ build-backend:
 	cd backend && npm run build
 
 serve:
-	node backend/target/main.js
+	node --env-file=backend/.env backend/target/main.js 
+
+start: build serve
 		

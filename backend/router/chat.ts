@@ -1,12 +1,14 @@
-import express, { json } from "express";
+import express from "express";
 import extractMessageKeywords from "../prompt/extractMessageKeywords";
-export const router = express.Router();
+import fetchAndSelectPages from "../domain/fetchAndSelectPages";
+const router = express.Router();
 
 router.post("/", async (req, res) => {
   const message: string = req.body;
-  const keywrods = await extractMessageKeywords(message);
-
-  res.send(json);
+  const keywords = await extractMessageKeywords(message);
+  const urls = await fetchAndSelectPages(keywords);
+  const url = urls[0];
+  res.json(url);
 });
 
 export default router;

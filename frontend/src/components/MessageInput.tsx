@@ -27,6 +27,7 @@ export function MessageInput({ addMessage }: MessageInputProps) {
         },
         body: JSON.stringify({ message }),
       });
+      console.log(res.body);
 
       if (!res.ok) {
         throw new Error("Failed to send message");
@@ -36,7 +37,7 @@ export function MessageInput({ addMessage }: MessageInputProps) {
       // Add the bot's response to the chat
       addMessage({
         type: "bot",
-        content: data.response || "No response from server",
+        content: data || "No response from server",
       });
     } catch (error) {
       addMessage({
