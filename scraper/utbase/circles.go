@@ -4,7 +4,6 @@ import (
 	"regexp"
 
 	// "github.com/aster-void/todai-chatbot/scraper/database"
-	"github.com/aster-void/todai-chatbot/scraper/common"
 	"github.com/aster-void/todai-chatbot/scraper/formatter"
 	"github.com/aster-void/todai-chatbot/scraper/iohandler"
 	"github.com/aster-void/todai-chatbot/scraper/utils"
@@ -16,7 +15,7 @@ func ScrapeCircles() {
 	utils.FatalErr(err)
 	result_page_regexp, err := regexp.Compile(`(https://ut-base.info)?\/circles\/\d+`)
 	utils.FatalErr(err)
-	var utbase_circles = common.Scrape(&common.Config{
+	var utbase_circles = Scrape(&Config{
 		Domain:                    "ut-base.info",
 		StartAt:                   "https://ut-base.info/circles/",
 		NextPageSelector:          "a.page-link",
