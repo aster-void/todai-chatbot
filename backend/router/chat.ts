@@ -8,7 +8,7 @@ router.post("/", async (req, res) => {
   const keywords = await extractMessageKeywords(message);
   const urls = await fetchAndSelectPages(keywords);
   const url = urls[0]
-  res.json(urls[0]);
+  res.json(url);
 });
 
 export default router;
