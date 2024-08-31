@@ -19,13 +19,19 @@ export default async function fetchAndSelectPages(
       },
     });
 
-    //keywordsの少なくとも一つがpage.wordsの少なくとも一つに部分的に含まれるpageを持ってくる
-    //関連性でソートするためには修正する必要がある
-    const selectedPages: Page[] = pages.filter((page: Page) =>
-      keywords.some((keyword: string) =>
-        page.words.some((word: string) => word.includes(keyword)),
-      ),
-    );
+    //マッチしたキーワードの数の降順でソート
+    const selectedPages: Page[] = pages
+      .map((page: Page) => {
+        const matchingKeywords = keywords.filter((keyword: string) =>
+          page.words.some((word: string) => word.includes(keyword)),
+        );
+        return {
+          ...page,
+          score: matchingKeywords.length,
+        };
+      })
+      .filter((page) => page.score > 0)
+      .sort((a, b) => b.score - a.score);
 
     return selectedPages.map((selectedPage: Page) => selectedPage.url);
   } catch (error) {
