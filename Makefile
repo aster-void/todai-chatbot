@@ -65,4 +65,7 @@ serve:
 	node --env-file=backend/.env backend/target/main.js 
 
 start: build serve
+
+transform: build 
+		cd backend; node --env-file=.env target/bin/transform-data-and-store-to-db.js
 		
