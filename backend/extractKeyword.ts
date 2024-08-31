@@ -15,12 +15,11 @@ export default async function extractKeywords(text: string): Promise<string[]> {
       max_tokens: 50,
       temperature: 0.5,
     });
-    
+
     const keywords = response?.choices?.[0]?.message?.content
-      ?.split(',')
-      .map(keyword => keyword.trim())
-      .filter(keyword => keyword.length > 0); // 空の要素を除外
-  
+      ?.split(",")
+      .map((keyword) => keyword.trim())
+      .filter((keyword) => keyword.length > 0); // 空の要素を除外
 
     return keywords || [];
   } catch (error) {
