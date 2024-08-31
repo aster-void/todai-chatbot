@@ -10,5 +10,5 @@ export default async function selectPages(keywords: string[]): Promise<string[]>
 }
 
 async function getOpenAiScore(keywords: string[], pageWords: string[]): number{
-    model: "get-4o",
+    model: "get-4",
 }
