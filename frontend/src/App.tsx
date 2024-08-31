@@ -7,12 +7,10 @@ function App() {
   return (
     <>
       <Box
-        display="flex"
-        flexDirection="column"
         alignItems="center"
         justifyContent="center"
-        width="100%"
-        height="100vh"
+        width="1300px"
+        height="600px"
         bgcolor="#f5f5f5"
       >
         <Header />

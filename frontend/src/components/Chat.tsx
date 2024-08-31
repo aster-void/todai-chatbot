@@ -33,7 +33,7 @@ export function Chat() {
         sx={{
           display: "flex",
           flexDirection: "column",
-          height: "90%",
+          height: "100%",
           padding: 2,
           width: "100%",
         }}
