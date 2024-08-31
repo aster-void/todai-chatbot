@@ -22,8 +22,10 @@ export default async function extractKeywords(text: string): Promise<string[]> {
       ?.split(",")
       .map((keyword) => keyword.trim())
       .filter((keyword) => keyword.length > 0); // 空の要素を除外
-
-    return keywords || [];
+    if (!keywords || keywords.length === 0) {
+      throw new Error("Keywords array is empty or undefined");
+    }
+    return keywords;
   } catch (error) {
     console.error("Error fetching keywords:", error);
     return [];
