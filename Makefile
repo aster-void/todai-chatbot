@@ -58,6 +58,7 @@ watch-backend:
 	cd backend; npm run dev
 
 build:build-frontend build-backend 
+	cp favicon.ico public/
 
 build-frontend: 
 	cd frontend && npm run build
