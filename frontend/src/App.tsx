@@ -9,7 +9,7 @@ function App() {
       sx={{
         display: "flex",
         flexDirection: "column",
-        height: "85vh", 
+        height: "85vh",
         width: "95vw", // 固定幅を設定
         margin: "0 auto", // 中央揃え
         backgroundColor: "white",
