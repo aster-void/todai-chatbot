@@ -1,6 +1,6 @@
 import extractPageKeywords from "../prompt/extractPageKeyword";
 import createSummary from "../prompt/createSummary";
-import { pdfParse } from "../prompt/summary-pdf";
+import { pdfParse } from "../prompt/transcriptPdf";
 
 type OutputPage = {
   url: string;
