@@ -3,7 +3,6 @@ import { MessageInput } from "./MessageInput";
 import { deepOrange } from "@mui/material/colors";
 import { useState } from "react";
 
-// Use the shared Message type defined earlier
 interface Message {
   type: "user" | "bot";
   content?: string;
@@ -12,9 +11,8 @@ interface Message {
 }
 
 export function Chat() {
-  const [messages, setMessages] = useState<Message[]>([]); // State to hold all messages
+  const [messages, setMessages] = useState<Message[]>([]);
 
-  // Function to handle adding a new message
   const addMessage = (message: Message) => {
     setMessages((prevMessages) => [...prevMessages, message]);
   };
@@ -27,18 +25,20 @@ export function Chat() {
         height: "100%",
         width: "90%",
         padding: 2,
-        position: "relative", // Ensure child elements can be positioned relative to this container
+        position: "relative",
       }}
     >
       <Avatar sx={{ bgcolor: deepOrange[500] }}>東大</Avatar>
+
+      {/* Adjusted Box to ensure it does not overlap with the input */}
       <Box
         sx={{
           flexGrow: 1,
           overflowY: "auto",
           padding: 1,
+          marginBottom: "80px", // Ensure space for the input box
         }}
       >
-        {/* Map through the messages array and display each message */}
         {messages.length > 0 ? (
           messages.map((message, index) => (
             <Box
@@ -61,20 +61,17 @@ export function Chat() {
                   backgroundColor: message.type === "user" ? "#DCF8C6" : "#FFF",
                 }}
               >
-                {/* Check if the content is a URL and render it as a Link if so */}
                 {message.url ? (
-                  <>
-                    <Box sx={{ display: "flex", flexDirection: "column" }}>
-                      <Link
-                        href={message.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {message.url}
-                      </Link>
-                      {message.summary}
-                    </Box>
-                  </>
+                  <Box sx={{ display: "flex", flexDirection: "column" }}>
+                    <Link
+                      href={message.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {message.url}
+                    </Link>
+                    {message.summary}
+                  </Box>
                 ) : (
                   <Typography>{message.summary || message.content}</Typography>
                 )}
@@ -86,14 +83,15 @@ export function Chat() {
         )}
       </Box>
 
-      {/* MessageInput component positioned at the bottom with 10px margin */}
+      {/* MessageInput component at the bottom */}
       <Box
         sx={{
-          position: "absolute",
+          position: "fixed", // Fixed position to stay at the bottom
           bottom: 10, // 10px from the bottom
-          left: 0,
-          right: 0,
+          left: "5%", // Centered horizontally based on parent width
+          right: "5%", // Centered horizontally based on parent width
           padding: 2,
+          backgroundColor: "white", // Background color to cover content behind it
         }}
       >
         <MessageInput addMessage={addMessage} />
