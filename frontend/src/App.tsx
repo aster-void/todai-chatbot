@@ -5,17 +5,25 @@ import { Chat } from "./components/Chat";
 
 function App() {
   return (
-    <>
-      <Box
-        alignItems="center"
-        justifyContent="flex-start" // Headerを最上部に配置
-        height="700px" // ビューポートの高さを設定
-        width="1200px"
-      >
+    <Box
+      display="flex"
+      flexDirection="column"
+      height="100vh" // ビューポートの高さを設定
+      width="1200px"
+    >
+      <Box>
         <Header />
-        <Chat />
       </Box>
-    </>
+      <Box
+        flex="1" // このBoxが残りのスペースを埋める
+        display="flex"
+        flexDirection="column"
+      >
+        <Chat />
+        <Box mt="auto">
+        </Box>
+      </Box>
+    </Box>
   );
 }
 

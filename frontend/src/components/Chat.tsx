@@ -20,73 +20,88 @@ export function Chat() {
   };
 
   return (
-    <>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        width: "100%",
+        padding: 2,
+        position: "relative", // Ensure child elements can be positioned relative to this container
+      }}
+    >
+      <Avatar sx={{ bgcolor: deepOrange[500] }}>東大</Avatar>
       <Box
         sx={{
-          display: "flex",
-          flexDirection: "column",
-          height: "100%",
-          padding: 2,
-          width: "100%",
-          marginBottom: "120px",
+          flexGrow: 1,
+          overflowY: "auto",
+          padding: 1,
         }}
       >
-        <Avatar sx={{ bgcolor: deepOrange[500] }}>東大</Avatar>
-        <Box sx={{ flexGrow: 1, overflowY: "auto", padding: 1 }}>
-          {/* Map through the messages array and display each message */}
-          {messages.length > 0 ? (
-            messages.map((message, index) => (
-              <Box
-                key={index}
+        {/* Map through the messages array and display each message */}
+        {messages.length > 0 ? (
+          messages.map((message, index) => (
+            <Box
+              key={index}
+              sx={{
+                display: "flex",
+                marginBottom: 1,
+                justifyContent:
+                  message.type === "user" ? "flex-end" : "flex-start",
+              }}
+            >
+              <Paper
                 sx={{
                   display: "flex",
-                  marginBottom: 1,
-                  justifyContent:
-                    message.type === "user" ? "flex-end" : "flex-start",
+                  maxWidth: "60%",
+                  padding: 1,
+                  borderRadius: 2,
+                  boxShadow: 1,
+                  border: 1,
+                  backgroundColor:
+                    message.type === "user" ? "#DCF8C6" : "#FFF",
                 }}
               >
-                <Paper
-                  sx={{
-                    display: "flex",
-                    maxWidth: "60%",
-                    padding: 1,
-                    borderRadius: 2,
-                    boxShadow: 1,
-                    border: 1,
-                    backgroundColor:
-                      message.type === "user" ? "#DCF8C6" : "#FFF",
-                  }}
-                >
-                  {/* Check if the content is a URL and render it as a Link if so */}
-                  {message.url ? (
-                    <>
-                      <Box sx={{ display: "flex", flexDirection: "column" }}>
-                        <Link
-                          href={message.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {message.url}
-                        </Link>
-                        {message.summary}
-                      </Box>
-                    </>
-                  ) : (
-                    <Typography>
-                      {message.summary || message.content}
-                    </Typography>
-                  )}
-                </Paper>
-              </Box>
-            ))
-          ) : (
-            <Typography>東大チャットbotに質問しましょう!</Typography>
-          )}
-        </Box>
+                {/* Check if the content is a URL and render it as a Link if so */}
+                {message.url ? (
+                  <>
+                    <Box sx={{ display: "flex", flexDirection: "column" }}>
+                      <Link
+                        href={message.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {message.url}
+                      </Link>
+                      {message.summary}
+                    </Box>
+                  </>
+                ) : (
+                  <Typography>
+                    {message.summary || message.content}
+                  </Typography>
+                )}
+              </Paper>
+            </Box>
+          ))
+        ) : (
+          <Typography>東大チャットbotに質問しましょう!</Typography>
+        )}
+      </Box>
 
-        {/* Pass the addMessage function as props to MessageInput */}
+      {/* MessageInput component positioned at the bottom with 10px margin */}
+      <Box
+        sx={{
+          position: "absolute",
+          bottom: 10, // 10px from the bottom
+          left: 0,
+          right: 0,
+          padding: 2,
+          backgroundColor: "#fff", // Ensure it is on top of the other content
+        }}
+      >
         <MessageInput addMessage={addMessage} />
       </Box>
-    </>
+    </Box>
   );
 }
