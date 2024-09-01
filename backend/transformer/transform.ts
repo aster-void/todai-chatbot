@@ -1,6 +1,9 @@
 import extractPageKeywords from "../prompt/extractPageKeyword";
 import createSummary from "../prompt/createSummary";
 import { pdfParse } from "../prompt/transcriptPdf";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 type OutputPage = {
   url: string;
@@ -21,6 +24,11 @@ type Input = {
 };
 type Output = OutputPage[];
 
+// Function to introduce a delay
+function delay(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 export async function transform(json: Input): Promise<Output> {
   const pagesFromPDF = await Promise.all(
     (json.pdfs || []).map(async (pdf) => {
@@ -31,14 +39,37 @@ export async function transform(json: Input): Promise<Output> {
       return page;
     }),
   );
-  const pages = json.pages.concat(pagesFromPDF).map(async (page) => {
+
+  const allPages = json.pages.concat(pagesFromPDF);
+  const outputPages: Output = [];
+  
+  for (let i = 0; i < allPages.length; i++) {
+    const page = allPages[i];
+    if(page.content.length > 5000){
+      console.error(page.content.length);
+    }
+    // Process each page
     const ret: OutputPage = {
       ...page,
       words: ["todo"], // await extractPageKeywords(page.content),
       summary:"todo",// await createSummary(page.content),
     };
-    return ret;
-  });
+    await prisma.page.create({
+      data: {
+        url: ret.url,
+        title: ret.title, //lastupdateはエラーが出てたので一旦除外した
+        summary: ret.summary,
+        words: ret.words,
+      },
+    });
+    
+    // outputPages.push(ret);
 
-  return await Promise.all(pages);
+    // Pause for 5 seconds after every 10 iterations
+    if ((i + 1) % 10 === 0) {
+      await delay(1000);
+    }
+  }
+
+  return outputPages;
 }
