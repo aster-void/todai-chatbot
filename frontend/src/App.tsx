@@ -20,8 +20,7 @@ function App() {
         flexDirection="column"
       >
         <Chat />
-        <Box mt="auto">
-        </Box>
+        <Box mt="auto"></Box>
       </Box>
     </Box>
   );

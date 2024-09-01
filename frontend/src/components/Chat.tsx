@@ -58,8 +58,7 @@ export function Chat() {
                   borderRadius: 2,
                   boxShadow: 1,
                   border: 1,
-                  backgroundColor:
-                    message.type === "user" ? "#DCF8C6" : "#FFF",
+                  backgroundColor: message.type === "user" ? "#DCF8C6" : "#FFF",
                 }}
               >
                 {/* Check if the content is a URL and render it as a Link if so */}
@@ -77,9 +76,7 @@ export function Chat() {
                     </Box>
                   </>
                 ) : (
-                  <Typography>
-                    {message.summary || message.content}
-                  </Typography>
+                  <Typography>{message.summary || message.content}</Typography>
                 )}
               </Paper>
             </Box>
