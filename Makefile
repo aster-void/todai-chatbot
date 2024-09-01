@@ -70,6 +70,7 @@ scrape:
 	cd scraper; go run .
 preprocess:
 	make scrape
+	cp scraper/result backend/data -r
 	make transform
 
 transform: build 
