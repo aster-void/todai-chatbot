@@ -34,8 +34,8 @@ export async function transform(json: Input): Promise<Output> {
   const pages = json.pages.concat(pagesFromPDF).map(async (page) => {
     const ret: OutputPage = {
       ...page,
-      words: await extractPageKeywords(page.content),
-      summary: await createSummary(page.content),
+      words: ["todo"], // await extractPageKeywords(page.content),
+      summary:"todo",// await createSummary(page.content),
     };
     return ret;
   });
