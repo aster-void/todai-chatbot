@@ -14,6 +14,7 @@ import (
 
 	"github.com/PuerkitoBio/goquery"
 	"github.com/aster-void/todai-chatbot/scraper/common"
+	"github.com/aster-void/todai-chatbot/scraper/formatter"
 	"github.com/aster-void/todai-chatbot/scraper/iohandler"
 	"github.com/gocolly/colly"
 )
@@ -109,7 +110,7 @@ func ScrapeNews() ([]common.Page, []common.PDF) {
 			URL:        url,
 			Title:      title,
 			LastUpdate: &unix,
-			Content:    content,
+			Content:    formatter.CommonFormatter(content),
 		}
 	})
 

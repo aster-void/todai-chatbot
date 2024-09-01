@@ -15,7 +15,7 @@ func CommonFormatter(in string) (out string) {
 		if len(line) == 0 {
 			continue
 		}
-		out += line + "\n"
+		out += strings.ReplaceAll(line, " ", "") + "\n"
 	}
 	return
 }
