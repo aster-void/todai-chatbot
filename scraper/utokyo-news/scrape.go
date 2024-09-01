@@ -25,7 +25,7 @@ func ScrapeNewsAndSave() {
 }
 
 const year = 365 * 24 * time.Hour
-const SKIP_PAGE_THRESHOLD_BYTES = 7000
+const SKIP_PAGE_THRESHOLD_BYTES = 5000
 
 func ScrapeNews() ([]common.Page, []common.PDF) {
 	url_page := make(map[string]common.Page)

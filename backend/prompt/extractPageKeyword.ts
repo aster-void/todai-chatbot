@@ -6,7 +6,7 @@ export default async function extractPageKeywords(
 ): Promise<string[]> {
   try {
     const response = await openai.chat.completions.create({
-      model: "gpt-4o",
+      model: "gpt-3.5-turbo",
       messages: [
         { role: "system", content: "あなたは記事のレビュアーです。" },
         {
