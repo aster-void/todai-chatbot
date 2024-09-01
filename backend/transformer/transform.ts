@@ -37,7 +37,7 @@ export async function transform(json: Input): Promise<Output> {
         content: await pdfParse(pdf.content),
       };
       return page;
-    })
+    }),
   );
 
   const allPages = json.pages.concat(pagesFromPDF);

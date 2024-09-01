@@ -1,14 +1,14 @@
-import { PrismaClient } from "@prisma/client";
+// import { PrismaClient } from "@prisma/client";
 import { transform } from "../transformer/transform";
 import fs from "node:fs";
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
 
 async function main(path: string) {
   const data = fs.readFileSync(path, "utf-8");
   const input = JSON.parse(data);
 
-  const output = await transform(input);
+  await transform(input);
   // await Promise.all(
   //   output.map(async (page) => {
   //     await prisma.page.create({
@@ -22,5 +22,5 @@ async function main(path: string) {
   //   }),
   // );
 }
-// main("./data/ut-base/circles.json");
-main("./data/utokyo/news.json");
+main("./data/ut-base/circles.json");
+//main("./data/utokyo/news.json");
