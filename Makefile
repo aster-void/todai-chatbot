@@ -20,6 +20,10 @@ huskey:
 	npx husky
 	git checkout .husky
 
+test:
+	npx tsc backend/test/test.ts || true
+	node --env-file=./backend/.env backend/test/test.js
+
 ## Static checks
 
 # code style

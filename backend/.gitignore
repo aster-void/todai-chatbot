@@ -2,6 +2,6 @@
 /.env
 /target
 /test/test.js
-/test/sample.txt
+*.js
 /data/*
 !/data/sample

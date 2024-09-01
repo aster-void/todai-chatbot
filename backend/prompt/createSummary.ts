@@ -15,7 +15,7 @@ export default async function createSummary(passage: string): Promise<string> {
           content: passage,
         },
       ],
-      max_tokens: 50,
+      max_tokens: 200,
       temperature: 0.5,
     });
 
