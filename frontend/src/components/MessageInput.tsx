@@ -42,7 +42,7 @@ export function MessageInput({ addMessage }: MessageInputProps) {
       if (data.length === 0) {
         addMessage({
           type: "bot",
-          content: "該当するデータがありません",
+          content: "該当するデータがありません。",
         });
       } else {
         data.forEach((page: { url: string; summary: string }) => {

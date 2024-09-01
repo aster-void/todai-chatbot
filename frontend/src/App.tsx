@@ -6,18 +6,25 @@ import { Chat } from "./components/Chat";
 function App() {
   return (
     <Box
-      display="flex"
-      flexDirection="column"
-      height="100vh" // ビューポートの高さを設定
-      width="100vh"
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100vh", // ビューポートの高さを設定
+        width: "1200px", // 固定幅を設定
+        margin: "0 auto", // 中央揃え
+        backgroundColor: "white",
+      }}
     >
       <Box>
         <Header />
       </Box>
       <Box
-        flex="1" // このBoxが残りのスペースを埋める
-        display="flex"
-        flexDirection="column"
+        sx={{
+          flex: 1, // このBoxが残りのスペースを埋める
+          display: "flex",
+          flexDirection: "column",
+          overflow: "hidden", // コンテンツがはみ出さないように
+        }}
       >
         <Chat />
       </Box>
