@@ -55,5 +55,7 @@ testGroupPages();
 
 const passage = readFileSync("backend/test/sample.txt", "utf-8");
 createSummary(passage).then((summary) => console.log("summary: ", summary));
+extractPageKeywords(passage).then(console.log);
 const passage2 = readFileSync("backend/test/utokyo.txt", "utf-8");
 createSummary(passage2).then((summary) => console.log("summary: ", summary));
+extractPageKeywords(passage2).then(console.log);
