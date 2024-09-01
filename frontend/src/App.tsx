@@ -9,7 +9,7 @@ function App() {
       display="flex"
       flexDirection="column"
       height="100vh" // ビューポートの高さを設定
-      width="1200px"
+      width="100vh"
     >
       <Box>
         <Header />
@@ -20,7 +20,6 @@ function App() {
         flexDirection="column"
       >
         <Chat />
-        <Box mt="auto"></Box>
       </Box>
     </Box>
   );
