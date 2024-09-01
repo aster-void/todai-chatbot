@@ -25,7 +25,7 @@ export function Chat() {
         display: "flex",
         flexDirection: "column",
         height: "100%",
-        width: "100%",
+        width: "90%",
         padding: 2,
         position: "relative", // Ensure child elements can be positioned relative to this container
       }}

@@ -10,14 +10,13 @@ function App() {
         display: "flex",
         flexDirection: "column",
         height: "100vh", // ビューポートの高さを設定
-        width: "1200px", // 固定幅を設定
+        width: "100vw", // 固定幅を設定
         margin: "0 auto", // 中央揃え
         backgroundColor: "white",
+        color: "black",
       }}
     >
-      <Box>
         <Header />
-      </Box>
       <Box
         sx={{
           flex: 1, // このBoxが残りのスペースを埋める
