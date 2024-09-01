@@ -8,6 +8,7 @@ export default async function createSummary(passage: string): Promise<string> {
       messages: [
         {
           role: "system",
+
           content: `
             あなたは文章を読んで要約することを得意としています。
             以下のページを簡潔に一文で要約してください。
