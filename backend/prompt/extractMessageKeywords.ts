@@ -33,6 +33,7 @@ export default async function extractMessageKeywords(
     if (!keywords || keywords.length === 0) {
       throw new Error("Keywords array is empty or undefined");
     }
+    console.log(keywords);
     return keywords;
   } catch (error) {
     console.error("Error extracting keywords:", error);
