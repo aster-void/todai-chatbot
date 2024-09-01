@@ -94,7 +94,6 @@ export function Chat() {
           left: 0,
           right: 0,
           padding: 2,
-          backgroundColor: "#fff", // Ensure it is on top of the other content
         }}
       >
         <MessageInput addMessage={addMessage} />
