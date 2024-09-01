@@ -16,7 +16,7 @@ function App() {
         color: "black",
       }}
     >
-        <Header />
+      <Header />
       <Box
         sx={{
           flex: 1, // このBoxが残りのスペースを埋める
