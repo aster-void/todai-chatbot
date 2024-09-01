@@ -3,19 +3,16 @@ const openai = new OpenAI();
 
 export default async function createSummary(passage: string): Promise<string> {
   try {
-    const content = `以下の文章を簡潔に一文で要約してください。「この文章は」などの説明は不要です。
-          ######
-          ${passage}`;
     const response = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
       messages: [
         {
           role: "system",
-          content: "あなたは文章を読んで要約することを得意としています。",
+          content: "あなたは文章を読んで要約することを得意としています。以下のページを簡潔に一文で要約してください。「この文章は」などの説明は不要です。",
         },
         {
           role: "user",
-          content: content,
+          content: passage,
         },
       ],
       max_tokens: 50,

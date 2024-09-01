@@ -8,12 +8,10 @@ export default async function extractPageKeywords(
     const response = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
       messages: [
-        { role: "system", content: "あなたは記事のレビュアーです。" },
+        { role: "system", content: "あなたは記事の重要単語を抽出する人です。以下の記事から学生にとって特に重要な単語を複数抽出し、カンマ区切りで返してください。" },
         {
           role: "user",
-          content: `以下の記事から学生にとって特に重要な単語をいくつか抽出し、カンマ区切りで返してください。
-          ######
-          ${text}`,
+          content: `${text}`,
         },
       ],
       max_tokens: 50,
