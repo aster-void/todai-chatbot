@@ -66,8 +66,10 @@ serve:
 
 start: build serve
 
-preprocess:
+scrape:
 	cd scraper; go run .
+preprocess:
+	make scrape
 	make transform
 
 transform: build 
