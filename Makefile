@@ -66,6 +66,11 @@ serve:
 
 start: build serve
 
+preprocess:
+	cd scraper; go run .
+	make transform
+
 transform: build 
 		cd backend; node --env-file=.env target/bin/transform-data-and-store-to-db.js
 		
+	
