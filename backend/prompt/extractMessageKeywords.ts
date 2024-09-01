@@ -28,7 +28,8 @@ export default async function extractMessageKeywords(
     const keywords = response?.choices?.[0]?.message?.content
       ?.split(",")
       .map((keyword) => keyword.trim())
-      .filter((keyword) => keyword.length > 0); // 空の要素を除外
+      .filter((keyword) => keyword.length > 0) // 空の要素を除外
+      .filter((keyword) => keyword !== "教えて"); // workaround
     if (!keywords || keywords.length === 0) {
       throw new Error("Keywords array is empty or undefined");
     }
