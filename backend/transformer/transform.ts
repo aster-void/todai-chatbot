@@ -37,22 +37,22 @@ export async function transform(json: Input): Promise<Output> {
         content: await pdfParse(pdf.content),
       };
       return page;
-    }),
+    })
   );
 
   const allPages = json.pages.concat(pagesFromPDF);
   const outputPages: Output = [];
-  
+
   for (let i = 0; i < allPages.length; i++) {
     const page = allPages[i];
-    if(page.content.length > 5000){
+    if (page.content.length > 5000) {
       console.error(page.content.length);
     }
     // Process each page
     const ret: OutputPage = {
       ...page,
-      words: ["todo"], // await extractPageKeywords(page.content),
-      summary:"todo",// await createSummary(page.content),
+      words: await extractPageKeywords(page.content),
+      summary: await createSummary(page.content),
     };
     await prisma.page.create({
       data: {
@@ -62,7 +62,7 @@ export async function transform(json: Input): Promise<Output> {
         words: ret.words,
       },
     });
-    
+
     // outputPages.push(ret);
 
     // Pause for 5 seconds after every 10 iterations
