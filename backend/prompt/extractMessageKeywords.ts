@@ -5,20 +5,20 @@ export default async function extractMessageKeywords(
   message: string,
 ): Promise<string[]> {
   try {
-    const content = `以下のメッセージから特に重要な単語をいくつか抽出し、カンマ区切りで返してください。
-          ######
-          ${message}`;
-    console.log(message);
     const response = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
       messages: [
         {
           role: "system",
-          content: "あなたは与えられたメッセージをわかりやすくする人です。",
+          content: `
+            ユーザーのメッセージから重要な単語を複数抽出し、カンマ区切りで返してください。
+            例入力: プログラミングサークルと運動部について教えて。
+            例出力: プログラミング,サークル,運動部
+          `,
         },
         {
           role: "user",
-          content: content,
+          content: message,
         },
       ],
       max_tokens: 50,
@@ -34,7 +34,7 @@ export default async function extractMessageKeywords(
     }
     return keywords;
   } catch (error) {
-    console.error("Error fetching keywords:", error);
+    console.error("Error extracting keywords:", error);
     return [];
   }
 }

@@ -6,7 +6,7 @@ const router = express.Router();
 router.post("/", async (req, res) => {
   const message: string = req.body.message;
   const keywords = await extractMessageKeywords(message);
-  console.log(keywords);
+  if (keywords.length === 0) return res.status(500).send();
   const pages = await fetchAndSelectPages(keywords); //urlとsummaryをプロパティに持つオブジェクトの配列が返ってくる
   res.json(pages.slice(0, 3));
 });
