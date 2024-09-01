@@ -9,8 +9,8 @@ function App() {
       sx={{
         display: "flex",
         flexDirection: "column",
-        height: "90vh", // ビューポートの高さを設定
-        width: "90vw", // 固定幅を設定
+        height: "95vh", // ビューポートの高さを設定
+        width: "95vw", // 固定幅を設定
         margin: "0 auto", // 中央揃え
         backgroundColor: "white",
         color: "black",
